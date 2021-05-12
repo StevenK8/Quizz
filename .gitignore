@@ -223,7 +223,7 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 #obj
-obj/
+obj/*
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
