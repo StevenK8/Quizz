@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using QuizzNoGood.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace QuizzNoGood
     {
         public static void Main(string[] args)
         {
+            var u = User.CreateNewUser(12, "test", "password");
+            u.VerifyPassword("password");
+
+
+
             CreateHostBuilder(args).Build().Run();
         }
 
