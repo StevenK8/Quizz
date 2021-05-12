@@ -18,7 +18,7 @@ namespace QuizzNoGood.Models
         /// Possibly null
         /// </summary>
         public string False3 { get; private set; }
-    
+
         public bool VerifyAnswer(string answer)
         {
             throw new NotImplementedException();
