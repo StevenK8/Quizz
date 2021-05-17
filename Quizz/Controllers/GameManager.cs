@@ -15,13 +15,13 @@ namespace QuizzNoGood.Controllers
             Games = new HashSet<GameController>();
         }
 
-        public Game CreateGame()
+        public string CreateGame()
         {
             string id = GenerateUnregisteredRandomId();
             Game game = new Game(id);
             GameController gc = new GameController(game);
             Games.Add(gc);
-            return game;
+            return id;
         }
 
         public void RegisterUser(string gameId, User user)
@@ -47,11 +47,16 @@ namespace QuizzNoGood.Controllers
             do
             {
                 Random random = new Random();
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                const string chars = "0123456789";
                 generatedId = new string(Enumerable.Repeat(chars, 6).Select(s => s[random.Next(s.Length)]).ToArray());
             } while (Games.Any(g => Equals(g.Game.Id, generatedId)));
 
             return generatedId;
+        }
+
+        public GameController GetGameById(string gameId)
+        {
+            return Games.FirstOrDefault(g => Equals(g.Game.Id, gameId));
         }
     }
 }

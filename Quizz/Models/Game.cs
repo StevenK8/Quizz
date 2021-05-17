@@ -6,18 +6,16 @@ namespace QuizzNoGood.Models
     {
         public string Id { get; private set; }
 
-        public Dictionary<User, int> ScoreByUser { get; set; }
+        //public Dictionary<User, int> ScoreByUser { get; set; }
+        public HashSet<User> Users { get; set; }
 
         public HashSet<Question> QuestionAsked { get; set; }
 
         public Game(string id)
         {
-            
-        }
-
-        public void RegisterUser(User user)
-        {
-            ScoreByUser.Add(user, 0);
+            Id = id;
+            //ScoreByUser = new Dictionary<User, int>();
+            Users = new HashSet<User>();
         }
     }
 }

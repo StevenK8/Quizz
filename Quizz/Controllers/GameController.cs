@@ -11,17 +11,18 @@ namespace QuizzNoGood.Controllers
     {
         public Game Game { get; }
 
-        private HubConnection GameConnection { get; set; }
+        public HubConnection GameConnection { get; private set; }
 
         public GameController(Game game)
         {
             Game = game;
+            Connect();
         }
 
         public void StartGame()
         {
-            Connect();
             ListenControllerEvent();
+            GameConnection.SendAsync("StartGame", Game);
         }
 
         private async void Connect()
@@ -44,7 +45,7 @@ namespace QuizzNoGood.Controllers
 
         public void RegisterUser(User user)
         {
-            Game.ScoreByUser.Add(user,0);
+            Game.Users.Add(user);
         }
     }
 }
