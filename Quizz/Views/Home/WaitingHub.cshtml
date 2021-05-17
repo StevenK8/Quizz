@@ -2,3 +2,15 @@
 @{
     ViewData["Title"] = "Salle d'attente";
 }
+
+<h1>Identifiant de la partie : </h1>
+<h1 id="idgame">@Model.Id</h1>
+
+<a asp-controller="Home" asp-action="GameView" asp-route-gameId="@Model.Id" method="post">lancer la partie</a>
+
+<div id="playerlist">
+
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="/js/waitinghub.js"></script>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace QuizzNoGood.Controllers
 {
@@ -34,10 +35,30 @@ namespace QuizzNoGood.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult WaitingHub()
+        public IActionResult WaitingHub(string isJoin)
         {
-            var game = WebContext.GetInstance().GameManager.CreateGame();
-            return View(new WaitingHubViewModel(game));
+            //TODO des tests ici
+            bool isJoinb = Equals(isJoin, "true"); 
+            if (isJoinb)
+            {
+                var id = Request.Form["idGame"].First();
+                WebContext.GetInstance().GameManager.RegisterUser(id, new User(1,"test1","blbllb"));
+                return View(new WaitingHubViewModel(id));
+
+            }
+            else
+            {
+                //HttpContext.Session.SetString("user","ze");
+                var id = WebContext.GetInstance().GameManager.CreateGame();
+                WebContext.GetInstance().GameManager.RegisterUser(id, new User(2, "test2", "blbllb"));
+                return View(new WaitingHubViewModel(id));
+            }
+        }
+
+        public IActionResult GameView(string gameId)
+        {
+            WebContext.GetInstance().GameManager.StartGame(gameId);
+            return View();
         }
     }
 }

@@ -13,7 +13,8 @@ namespace QuizzNoGood.Models
         public int Id { get; set; }
         public string Username { get; private set; }
         public string CryptedPassword { get; set; }
-        
+        public string ConnectionId { get; set; }
+
         /// <summary>
         /// Create a User, used only with an already crypted password
         /// </summary>

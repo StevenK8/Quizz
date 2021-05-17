@@ -4,6 +4,11 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="WaitingHub">Créer un Quiz</a>
+    <a asp-area="" asp-controller="Home" asp-action="WaitingHub" asp-route-isJoin="false">Créer un Quiz A</a>
+    
+    <form asp-controller="Home" asp-action="WaitingHub" asp-route-isJoin="true" method="post">
+        @Html.TextBox("idGame")
+        <button type="submit">Rejoindre un Quiz</button>
+    </form>
 
 </div>
