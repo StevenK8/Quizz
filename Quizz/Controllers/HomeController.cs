@@ -33,5 +33,11 @@ namespace QuizzNoGood.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult WaitingHub()
+        {
+            var game = WebContext.GetInstance().GameManager.CreateGame();
+            return View(new WaitingHubViewModel(game));
+        }
     }
 }
