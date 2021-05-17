@@ -20,6 +20,21 @@ body {
     padding-bottom: 50px;
 }
 
+.Button_submit {
+    background: transparent;
+    border: none;
+    /*background-image:;*/
+    background-size: cover;
+    /*
+    padding: 15%; /*important
+    font-size: 100%; /*important
+    */
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+}
+
 img.Logo {
     align-self:center;
 }
