@@ -5,17 +5,24 @@
 <body>
     <div class="container">
         <!--Bouton de profil/connection -->
-        <!--Voir comment gerer les difficultés-->
+        <a asp-area="" asp-page="/Profil" class="Button">Profil</a>
+        
         <h1 class="display-4">Welcome</h1>
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="WaitingHub">Créer un Quiz</a>
 
         <div class="flex">
             <img src="/media/Logo_ Projet.png" class="Logo" alt="" />
 
+            <div> 
+                Difficultés </n>
+                <button>Facile</button>
+                <button>Moyen</button>
+                <button>Difficile</button>
+            </div>
             <!--Timer est sur la même ligne que le logo, mais ca serait bien qu'il soit en dessous-->
-            <a asp-area="" asp-page="/Timer" class="Button">A Timer</a>
-            <a asp-area="" asp-page="/Theme" class="Button">B Theme</a>
-            <a asp-area="" asp-page="/Sudden_Death" class="Button">C Mort Subite</a>
+            <a asp-area="" asp-page="/WaitingHub" class="Button">A Timer</a>
+            <a asp-area="" asp-page="/Themes" class="Button">B Theme</a>
+            <a asp-area="" asp-page="/WaitingHub" class="Button">C Mort Subite</a>
         </div>
     </div>
 </body>
