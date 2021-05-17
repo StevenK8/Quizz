@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace QuizzNoGood.Models
 {
@@ -9,9 +6,18 @@ namespace QuizzNoGood.Models
     {
         public string Id { get; private set; }
 
-        public Dictionary<User,int> ScoreByUser { get; set; }
+        public Dictionary<User, int> ScoreByUser { get; set; }
 
         public HashSet<Question> QuestionAsked { get; set; }
-        
+
+        public Game(string id)
+        {
+            
+        }
+
+        public void RegisterUser(User user)
+        {
+            ScoreByUser.Add(user, 0);
+        }
     }
 }
