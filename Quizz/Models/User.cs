@@ -3,6 +3,7 @@ using BCrypt.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ganss.XSS;
 
 namespace QuizzNoGood.Models
 {
@@ -11,7 +12,16 @@ namespace QuizzNoGood.Models
         private const int SALT_NUMBER = 10;
 
         public int Id { get; set; }
-        public string Username { get; private set; }
+        private string _username;
+        public string Username {
+            get => _username;
+            private set
+            {
+#warning TODO
+                var sanitizer = new HtmlSanitizer();
+                _username = sanitizer.Sanitize(value);
+            }
+        }
         public string CryptedPassword { get; set; }
         
         /// <summary>
