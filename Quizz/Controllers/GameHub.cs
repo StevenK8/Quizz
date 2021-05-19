@@ -44,10 +44,10 @@ namespace QuizzNoGood.Controllers
             }
         }
 
-        public async Task AnswerQuestion(int userId, string gameId, int answerId)
+        public async Task AnswerQuestion(int userId, string gameId, string answer)
         {
             var game = WebContext.GetInstance().GameManager.GetGameById(gameId);
-            game.AnswerQuestion(userId, answerId);
+            game.AnswerQuestion(userId, answer);
         }
     }
 }

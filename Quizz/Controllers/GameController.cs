@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AngleSharp.Dom;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR.Client;
 using QuizzNoGood.Models;
 
@@ -51,15 +53,38 @@ namespace QuizzNoGood.Controllers
             }
         }
 
-       
+
         public void AskQuestion()
         {
+            if (Game.CurrentQuestion != null)
+            {
+                Game.QuestionAsked.Add(Game.CurrentQuestion);
+            }
 
+            Game.ResetUsersHasAnswered();
+
+            Random randomizer = new Random();
+            Question question = Game.QuestionPool.ToArray()[randomizer.Next(Game.QuestionPool.Count)];
+
+            Game.QuestionPool.Remove(question);
+            Game.CurrentQuestion = question;
+
+            List<string> randomisedAnswers = ShuffleAnswers(question);
+            GameConnection.SendAsync("AskQuestion", question.Sentence, randomisedAnswers);
         }
 
-        public void AnswerQuestion(int userId, int answerId)
+        public void AnswerQuestion(int userId, string answer)
         {
-            
+            Game.SetUserHasAnswered(userId);
+            if (Equals(Game.CurrentQuestion.Answer, answer))
+            {
+                Game.AddPointToUser(userId);
+            }
+
+            if (Game.AllUsersAnswered())
+            {
+
+            }
         }
 
         public void ConnectUser(int idUser)
@@ -74,6 +99,29 @@ namespace QuizzNoGood.Controllers
         public void SetUserConnectionId(int idUser, string contextConnectionId)
         {
             Game.SetUserConnectionId(idUser, contextConnectionId);
+        }
+
+        private List<string> ShuffleAnswers(Question question)
+        {
+            List<string> questions = new List<string>
+            {
+                question.Answer, question.False1, question.False2, question.False3
+            };
+
+
+            Random rng = new Random();
+
+            int n = questions.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                string value = questions[k];
+                questions[k] = questions[n];
+                questions[n] = value;
+            }
+
+            return questions;
         }
     }
 }
