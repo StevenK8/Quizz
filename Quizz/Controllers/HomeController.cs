@@ -21,6 +21,7 @@ namespace QuizzNoGood.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -53,6 +54,12 @@ namespace QuizzNoGood.Controllers
                 WebContext.GetInstance().GameManager.RegisterUser(id, new User(2, "test2", "blbllb"));
                 return View(new WaitingHubViewModel(id));
             }
+        }
+
+        public IActionResult Inscription(InscriptionViewModel inscription)
+        {
+            inscription.CreateUserFormInscription();
+            return View();
         }
 
         public IActionResult GameView(string gameId)
