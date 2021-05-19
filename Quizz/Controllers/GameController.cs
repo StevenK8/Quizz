@@ -25,6 +25,11 @@ namespace QuizzNoGood.Controllers
             GameConnection.SendAsync("StartGame", Game);
         }
 
+        private void ListenControllerEvent()
+        {
+
+        }
+
         private async void Connect()
         {
             try
@@ -46,11 +51,7 @@ namespace QuizzNoGood.Controllers
             }
         }
 
-        private void ListenControllerEvent()
-        {
-
-        }
-
+       
         public void AskQuestion()
         {
 
@@ -59,6 +60,20 @@ namespace QuizzNoGood.Controllers
         public void AnswerQuestion(int userId, int answerId)
         {
             
+        }
+
+        public void ConnectUser(int idUser)
+        {
+            Game.ConnectUser(idUser);
+            if (Game.AllUserConnected())
+            {
+                AskQuestion();
+            }
+        }
+
+        public void SetUserConnectionId(int idUser, string contextConnectionId)
+        {
+            Game.SetUserConnectionId(idUser, contextConnectionId);
         }
     }
 }

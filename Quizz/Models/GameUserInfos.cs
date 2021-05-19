@@ -17,5 +17,7 @@ namespace QuizzNoGood.Models
         public bool IsConnected { get; set; }
 
         public int Score { get; set; }
+
+        public string ConnectionId { get; set; }
     }
 }
