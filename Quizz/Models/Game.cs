@@ -5,9 +5,8 @@ namespace QuizzNoGood.Models
     public class Game
     {
         public string Id { get; private set; }
-
-        //public Dictionary<User, int> ScoreByUser { get; set; }
-        public HashSet<User> Users { get; set; }
+        
+        public HashSet<GameUserInfos> Users { get; set; }
 
         public HashSet<Question> QuestionAsked { get; set; }
 
@@ -15,7 +14,12 @@ namespace QuizzNoGood.Models
         {
             Id = id;
             //ScoreByUser = new Dictionary<User, int>();
-            Users = new HashSet<User>();
+            Users = new HashSet<GameUserInfos>();
+        }
+
+        public void RegisterUser(User user)
+        {
+            Users.Add(new GameUserInfos(user));
         }
     }
 }

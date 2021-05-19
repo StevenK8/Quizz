@@ -4,16 +4,35 @@
 }
 
 <body>
+    
+    <div class="Block_button">
 
+        <!--génère un lien pour rejoindre une partie-->
+        <!--Si personne regoignant -> bouton grisé -->
+        <button>Partager</button>
 
+        <!--Lance la Partie-->
+        <button>Commencer la partie </button>
+    </div>
 
-
+    <table>
+        <thead>
+            <th>Joueurs</th>
+        </thead>
+        <tbody>
+            <td>Player 1</td>
+            <td>Player 2</td>
+        </tbody>
+    </table>
 
 
 
 </body>
 
+
 <h1>Identifiant de la partie : </h1>
+
+<!-- PAS VIRER en dessous-->
 <h1 id="idgame">@Model.Id</h1>
 
 <a asp-controller="Home" asp-action="GameView" asp-route-gameId="@Model.Id" method="post">lancer la partie</a>

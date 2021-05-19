@@ -29,7 +29,15 @@ namespace QuizzNoGood.Controllers
         {
             try
             {
-                GameConnection = new HubConnectionBuilder().WithUrl("http://localhost:53701/GameHub").Build();
+                string address = "";
+
+#if DEBUG
+                address = "http://localhost:53701/GameHub";
+#else
+                address = ""; // todo mettre l'adresse 
+#endif
+
+                GameConnection = new HubConnectionBuilder().WithUrl(address).Build();
                 await GameConnection.StartAsync();
             }
             catch (Exception e)
@@ -43,9 +51,14 @@ namespace QuizzNoGood.Controllers
 
         }
 
-        public void RegisterUser(User user)
+        public void AskQuestion()
         {
-            Game.Users.Add(user);
+
+        }
+
+        public void AnswerQuestion(int userId, int answerId)
+        {
+            
         }
     }
 }

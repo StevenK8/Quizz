@@ -12,30 +12,60 @@ namespace QuizzNoGood.Controllers
         public async Task AskForConnection(int idUser, string idGame)
         {
             var gc = WebContext.GetInstance().GameManager.GetGameById(idGame);
-            var user = gc.Game.Users.FirstOrDefault(u => u.Id == idUser);
+            var user = gc.Game.Users.FirstOrDefault(u => u.User.Id == idUser);
 
             //TODO que test
-            user = gc.Game.Users.FirstOrDefault(u => u.ConnectionId == null);
+            user = gc.Game.Users.FirstOrDefault(u => u.User.ConnectionId == null);
 
 
-            user.ConnectionId = Context.ConnectionId;
+            user.User.ConnectionId = Context.ConnectionId;
 
-            string[] names = gc.Game.Users.Select(u => u.Username).ToArray();
+            string[] names = gc.Game.Users.Select(u => u.User.Username).ToArray();
             foreach (var gameUser in gc.Game.Users)
             {
-                await Clients.Client(gameUser.ConnectionId).SendAsync("UserConnected", names);
+                await Clients.Client(gameUser.User.ConnectionId).SendAsync("UserConnected", names);
             }
         }
 
         public async Task StartGame(Game game)
         {
-            string[] names = game.Users.Select(u => u.Username).ToArray();
+            string[] names = game.Users.Select(u => u.User.Username).ToArray();
             foreach (var gameUser in game.Users)
             {
-                await Clients.Client(gameUser.ConnectionId).SendAsync("GameStarted");
+                await Clients.Client(gameUser.User.ConnectionId).SendAsync("GameStarted");
             }
-
         }
 
+        public async Task UserConnectedToGame(int idUser, string idGame)
+        {
+            var gc = WebContext.GetInstance().GameManager.GetGameById(idGame);
+            var user = gc.Game.Users.FirstOrDefault(u => u.User.Id == idUser);
+            
+
+            user = gc.Game.Users.FirstOrDefault(u => u.User.ConnectionId == null);
+
+
+            user.User.ConnectionId = Context.ConnectionId;
+
+            string[] names = gc.Game.Users.Select(u => u.User.Username).ToArray();
+            foreach (var gameUser in gc.Game.Users)
+            {
+                await Clients.Client(gameUser.User.ConnectionId).SendAsync("UserConnected", names);
+            }
+        }
+
+        public async Task AskQuestion(Game game, Question question)
+        {
+            foreach (var gameUser in game.Users)
+            {
+                await Clients.Client(gameUser.User.ConnectionId).SendAsync("AskQuestion", question);
+            }
+        }
+
+        public async Task AnswerQuestion(int userId, string gameId, int answerId)
+        {
+            var game = WebContext.GetInstance().GameManager.GetGameById(gameId);
+            game.AnswerQuestion(userId, answerId);
+        }
     }
 }
