@@ -23,6 +23,21 @@ namespace QuizzNoGood.Controllers
         {
             return View();
         }
+        
+        public IActionResult Profil()
+        {
+            return View();
+        }
+        
+        public IActionResult Connection()
+        {
+            return View();
+        }
+        
+        public IActionResult Inscription()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

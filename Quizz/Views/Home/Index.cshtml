@@ -4,24 +4,26 @@
 
 <body>
     <div>
-        <a asp-area="" asp-page="/Profil" class="Button">Profil</a>
-        
+        <a asp-area="" asp-controller="Home" asp-action="Profil">Profil</a>
+        <a asp-area="" asp-controller="Home" asp-action="Inscription">Inscription</a>
+        <a asp-area="" asp-controller="Home" asp-action="Connection">connection</a>
+
         <h1 class="display-4">Welcome</h1>
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="WaitingHub">Créer un Quiz</a>
+        <a asp-area="" asp-controller="Home" asp-action="WaitingHub">Créer un Quiz</a>
 
         <form asp-controller="Home" asp-action="WaitingHub" asp-route-isJoin="true" method="post">
-        @Html.TextBox("idGame")
-        <button type="submit">Rejoindre un Quiz</button>
+            @Html.TextBox("idGame")
+            <button type="submit">Rejoindre un Quiz</button>
         </form>
 
         <div class="flex">
             <img src="/media/Logo_ Projet.png" class="Logo" alt="" />
 
             <div>
-                Difficultés <br/>
-                    <button>Facile</button>
-                    <button>Moyen</button>
-                    <button>Difficile</button>
+                Difficultés <br />
+                <button>Facile</button>
+                <button>Moyen</button>
+                <button>Difficile</button>
             </div>
 
             <a asp-area="" asp-page="/WaitingHub" class="Button">A Timer</a>
