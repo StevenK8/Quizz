@@ -3,17 +3,13 @@
 }
 
 <body>
-    <div class="container">
-
+    <div>
         <a asp-area="" asp-page="/Profil" class="Button">Profil</a>
         
         <h1 class="display-4">Welcome</h1>
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="WaitingHub">Créer un Quiz</a>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <a asp-area="" asp-controller="Home" asp-action="WaitingHub" asp-route-isJoin="false">Créer un Quiz A</a>
-    
-    <form asp-controller="Home" asp-action="WaitingHub" asp-route-isJoin="true" method="post">
+
+        <form asp-controller="Home" asp-action="WaitingHub" asp-route-isJoin="true" method="post">
         @Html.TextBox("idGame")
         <button type="submit">Rejoindre un Quiz</button>
     </form>
@@ -22,7 +18,7 @@
             <img src="/media/Logo_ Projet.png" class="Logo" alt="" />
 
             <div>
-                Difficultés <\n>
+                Difficultés <br/>
                     <button>Facile</button>
                     <button>Moyen</button>
                     <button>Difficile</button>

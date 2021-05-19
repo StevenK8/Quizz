@@ -72,7 +72,7 @@ namespace QuizzNoGood.Models
         public static User CreateNewUser(string username, string notCryptedPassword)
         {
             var salt = BCrypt.Net.BCrypt.GenerateSalt(SALT_NUMBER);
-            return new User(id, username, BCrypt.Net.BCrypt.HashPassword(notCryptedPassword, salt));
+            return new User(username, BCrypt.Net.BCrypt.HashPassword(notCryptedPassword, salt));
         }
 
         public bool VerifyPassword(string psw)
