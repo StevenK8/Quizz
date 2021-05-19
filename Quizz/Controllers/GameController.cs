@@ -51,9 +51,14 @@ namespace QuizzNoGood.Controllers
 
         }
 
-        public void RegisterUser(User user)
+        public void AskQuestion()
         {
-            Game.Users.Add(user);
+
+        }
+
+        public void AnswerQuestion(int userId, int answerId)
+        {
+            
         }
     }
 }

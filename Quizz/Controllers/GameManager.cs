@@ -27,7 +27,7 @@ namespace QuizzNoGood.Controllers
         public void RegisterUser(string gameId, User user)
         {
             var game = Games.FirstOrDefault(g => Equals(g.Game.Id, gameId));
-            game?.RegisterUser(user);
+            game?.Game.RegisterUser(user);
         }
 
         public void StartGame(string gameId)
