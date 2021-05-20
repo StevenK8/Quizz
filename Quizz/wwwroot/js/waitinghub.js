@@ -1,10 +1,13 @@
 ﻿"use strict";
 
-var userId = 2;
-var element = document.getElementById("idgame");
-var gameId = element.innerText;
+var urlParams = new URLSearchParams(window.location.search);
+var gameId = urlParams.get('gameId');
+var userId = urlParams.get('userId');
+
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/GameHub").build();
+
+
 
 connection.start().then(function () {
     console.log("Connexion établie");
@@ -25,4 +28,10 @@ connection.on("UserConnected", function (players) {
         tag.appendChild(text);
         element.appendChild(tag);
     })
+});
+
+connection.on("GameStarted", function () {
+    var search = window.location.search;
+    var location = window.location.origin + "/Home/GameView" + search;
+    window.location.replace = location;
 });

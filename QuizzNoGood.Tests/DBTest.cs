@@ -3,6 +3,7 @@ using QuizzNoGood.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using QuizzNoGood.Business;
 
 namespace QuizzNoGood.Tests
 {

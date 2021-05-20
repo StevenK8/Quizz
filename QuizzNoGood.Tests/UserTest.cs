@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QuizzNoGood.Buisness;
+using QuizzNoGood.Business;
 using QuizzNoGood.Models;
 using System;
 using System.Collections.Generic;

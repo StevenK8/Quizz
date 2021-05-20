@@ -25,13 +25,8 @@ namespace QuizzNoGood.Controllers
 
         public void StartGame()
         {
-            ListenControllerEvent();
+            LoadQuestions();
             GameConnection.SendAsync("StartGame", Game);
-        }
-
-        private void ListenControllerEvent()
-        {
-
         }
 
         private async void Connect()
@@ -55,6 +50,22 @@ namespace QuizzNoGood.Controllers
             }
         }
 
+        private void LoadQuestions()
+        {
+            Random randomizer = new Random();
+            DBConnection DB = new DBConnection();
+            var themes = DB.SelectThemes();
+            if (themes is not null)
+            {
+                List<Theme> themesForQuiz = new List<Theme>();
+                themesForQuiz.Add(themes.ToArray()[randomizer.Next(themes.Count)]);
+                themesForQuiz.Add(themes.ToArray()[randomizer.Next(themes.Count)]);
+                themesForQuiz.Add(themes.ToArray()[randomizer.Next(themes.Count)]);
+
+                var questions = DB.SelectQuestions(themesForQuiz.Select(t => t.Id).ToList(), Game.Difficulty);
+                Game.QuestionPool = questions.ToHashSet();
+            }
+        }
 
         public void AskQuestion()
         {
@@ -94,13 +105,25 @@ namespace QuizzNoGood.Controllers
 
                 if (Game.QuestionPool.Count == 0)
                 {
-                    //EndGame();
+                    EndGame();
                 }
                 else
                 {
                     AskQuestion();
                 }
             }
+        }
+
+        private async void EndGame()
+        {
+            await Task.Run(async () =>
+            {
+                await GameConnection.SendAsync("EndGame", Game);
+
+                Thread.Sleep(5000);
+
+                await GameConnection.SendAsync("DisplayScores", Game);
+            });
         }
 
         public void ConnectUser(int idUser)

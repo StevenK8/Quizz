@@ -1,4 +1,5 @@
-﻿@model WaitingHubViewModel
+﻿@using Microsoft.AspNetCore.Http
+@model WaitingHubViewModel
 @{
     ViewData["Title"] = "Salle d'attente";
 }
@@ -15,9 +16,11 @@
         <button>Commencer la partie </button>
     </div>
 
-    <table>
+    <table id="test">
         <thead>
-            <th>Joueurs</th>
+            <tr>
+                <th>Joueurs</th>
+            </tr>
         </thead>
         <tbody>
             <!--Affiche le pseudo des joueurs ayant rejoint la partie, 1 par ligne-->
@@ -41,6 +44,5 @@
 <div id="playerlist">
 
 </div>
-
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="/js/waitinghub.js"></script>

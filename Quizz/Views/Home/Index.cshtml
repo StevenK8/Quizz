@@ -3,32 +3,49 @@
 }
 
 <body>
-    <div>
-        <a asp-area="" asp-controller="Home" asp-action="Profil">Profil</a>
-        <a asp-area="" asp-controller="Home" asp-action="Inscription">Inscription</a>
-        <a asp-area="" asp-controller="Home" asp-action="Connection">connection</a>
+<div>
+    <div id="Menu">
+        <div Class="Button">
+            <a asp-area="" asp-controller="Home" asp-action="Profil">A-Profil</a>
+        </div>
 
-        <h1 class="display-4">Welcome</h1>
-        <a asp-area="" asp-controller="Home" asp-action="WaitingHub">Créer un Quiz</a>
+        <div Class="Button">
+            <a asp-area="" asp-controller="Home" asp-action="Inscription">B-Inscription</a>
+        </div>
 
-        <form asp-controller="Home" asp-action="WaitingHub" asp-route-isJoin="true" method="post">
-            @Html.TextBox("idGame")
-            <button type="submit">Rejoindre un Quiz</button>
-        </form>
+        <div Class="Button">
+            <a asp-area="" asp-controller="Home" asp-action="Connection">C-Connection</a>
+        </div>
+    </div>
+    
 
-        <div class="flex">
-            <img src="/src/Logo_ Projet.png" class="Logo" alt="" />
+    <br/>
 
-            <div>
-                Difficultés <br />
-                <button>Facile</button>
-                <button>Moyen</button>
-                <button>Difficile</button>
-                <br />
-                <br />
+    <a asp-area="" asp-controller="Home" asp-action="GoToWaitingHub">Créer un Quiz</a>
+
+    <form asp-controller="Home" asp-action="GoToWaitingHub" asp-route-isJoin="true" method="post">
+        @Html.TextBox("idGame")
+        <button type="submit">Rejoindre un Quiz</button>
+    </form>
+
+    <div class="flex">
+        <img src="/src/Logo_ Projet.png" class="Logo" alt="" />
+
+        <div>
+            Difficultés <br />
+            <button>Facile</button>
+            <button>Moyen</button>
+            <button>Difficile</button>
+            <br />
+            <br />
+        </div>
+        
+        <div Class="Center_container">
+            <div Class="Button" id="test">
+                <a asp-area="" asp-page="/WaitingHub">A Timer</a>
             </div>
-
-            <a asp-area="" asp-page="/WaitingHub" class="Button">A Timer</a>
+        </div>
+        
             <!--<a asp-area="" asp-page="/Themes" class="Button">B Theme</a>-->
             <!--<a asp-area="" asp-page="/WaitingHub" class="Button">C Mort Subite</a>-->
         </div>
