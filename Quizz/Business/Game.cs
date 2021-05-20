@@ -79,12 +79,25 @@ namespace QuizzNoGood.Business
             if (user != null)
             {
                 user.Score += 1;
+                user.IsGoodAnswer = true;
             }
         }
 
         public bool AllUsersAnswered()
         {
             return Users.All(u => u.HasAnswered);
+        }
+
+        public string[] ComputeScore()
+        {
+            List<string> result = new List<string>();
+
+            foreach (var user in Users)
+            {
+                result.Add($"{user.User.Username} : {user.Score}");
+            }
+
+            return result.ToArray();
         }
     }
 }

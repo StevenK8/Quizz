@@ -57,10 +57,72 @@ function GiveAnswer(choice) {
     });
 }
 
-connection.on("ReceiveAnswer", function (answer) {
-    
+connection.on("ReceiveAnswer", function (answer, score, isGoodAnswer) {
+    var answers = document.getElementById("answers");
+    answers.innerHTML = '';
+
+    var tag = document.createElement("p");
+
+    var text;
+    if (isGoodAnswer)
+    {
+        text = document.createTextNode("Bonne réponse !");
+    }
+    else
+    {
+        text = document.createTextNode("Mauvaise réponse... La bonne réponse était : " + answer);
+    }
+
+    tag.appendChild(text);
+    answers.appendChild(tag);
+
+    computeScore(score);
 });
 
+function computeScore(score) {
+
+    var scr = document.getElementById("scoring");
+    scr.innerHTML = '';
+
+    var tag = document.createElement("p");
+    var tag2 = document.createElement("br");
+    scr.appendChild(tag2);
+    scr.appendChild(tag2);
+    var text = document.createTextNode("Score des joueurs : ");
+    tag.appendChild(text);
+    scr.appendChild(tag);
+
+    score.forEach(userAndScores => {
+        tag = document.createElement("p");
+        text = document.createTextNode(userAndScores);
+        tag.appendChild(text);
+        scr.appendChild(tag);
+    });
+
+    //var table = document.createElement("table");
+    //var thead = document.createElement("thead");
+    //var tr = document.createElement("tr");
+    //var th = document.createElement("th");
+    //var text = document.createTextNode("Score");
+
+    //th.appendChild(text);
+    //tr.appendChild(th);
+    //thead.appendChild(tr);
+    //table.appendChild(thead);
+
+    //score.forEach(userAndScores => {
+    //    var tbody = document.createElement("tbody");
+    //    tr = document.createElement("tr");
+    //    var td = document.createElement("td");
+    //    text = document.createTextNode(userAndScores);
+
+    //    td.appendChild(text);
+    //    tr.appendChild(th);
+    //    tbody.appendChild(tr);
+    //});
+
+    //table.appendChild(tbody);
+}
 
 connection.on("EndGame", function (scores) {
    

@@ -23,5 +23,7 @@ namespace QuizzNoGood.Business
         public string ConnectionId { get; set; }
 
         public bool HasAnswered { get; set; }
+
+        public bool IsGoodAnswer { get; set; }
     }
 }

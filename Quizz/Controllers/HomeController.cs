@@ -21,6 +21,7 @@ namespace QuizzNoGood.Controllers
 
         public IActionResult Index(InscriptionViewModel inscription, int isInscription, ConnectionViewModel connection, int isConnection)
         {
+
 #warning gérer les exceptions
             if (isInscription == 1)
             {
