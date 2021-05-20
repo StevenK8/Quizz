@@ -15,7 +15,7 @@ namespace QuizzNoGood.Models
         }
 
         /// <summary>
-        /// Create a User, used only with an already crypted password
+        /// Create a Theme
         /// </summary>
         /// <param name="id"></param>
         /// <param name="themeName"></param>
@@ -26,7 +26,7 @@ namespace QuizzNoGood.Models
         }
         
         /// <summary>
-        /// Create a user and crypt the password
+        /// Create a Theme
         /// </summary>
         /// <param name="id"></param>
         /// <param name="themeName"></param>
