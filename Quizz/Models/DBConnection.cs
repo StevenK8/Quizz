@@ -84,7 +84,7 @@ namespace QuizzNoGood.Models
             }
         }
 
-        public User SelectThemes(string username)
+        public User SelectThemes()
         {
             string sql = $"SELECT id, theme, FROM themes";
             using (MySqlCommand command = new(sql, _mySqlConnection))
@@ -99,6 +99,8 @@ namespace QuizzNoGood.Models
                 }
             }
         }
+
+
 
         public List<Question> SelectQuestions(List<int> theme, List<int> difficulty)
         {
