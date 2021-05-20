@@ -84,6 +84,70 @@ namespace QuizzNoGood.Buisness
             }
         }
 
+        public User SelectThemes(string username)
+        {
+            string sql = $"SELECT id, theme, FROM themes";
+            using (MySqlCommand command = new(sql, _mySqlConnection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    if (!reader.Read()) //username c'est la clé donc un seul resultat
+                        return null;
+                    int id = int.TryParse(reader.GetString(0), out int k) ? k : 0;
+                    string theme = reader.GetString(1);
+                    return new Theme(id, theme);
+                }
+            }
+        }
+
+        public List<Question> SelectQuestions(List<int> theme, List<int> difficulty)
+        {
+            string themes = "";
+            for (int i=0; i<theme.Count; i++){
+                if (i!=theme.Count-1){
+                    themes += theme[i]+",";
+                }else{
+                    themes += theme[i];
+                }  
+            }
+
+            string difficulties = "";
+            for (int i=0; i<difficulty.Count; i++){
+                if (i!=difficulty.Count-1){
+                    difficulties += difficulty[i]+",";
+                }else{
+                    difficulties += difficulty[i];
+                }  
+            }
+            
+            string sql = $"SELECT idt, question, answer, false1, false2, false3, difficulty FROM questions WHERE idt in ({themes}) and difficulty in ({difficulties}) ORDER BY RAND() LIMIT 20";
+            
+
+            using (MySqlCommand command = new(sql, _mySqlConnection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    List<Question> questionList = new List<Question>();
+                    if (!reader.Read())
+                        return null;
+                    if(reader.HasRows){
+                        while(reader.Read()){
+                            int id = int.TryParse(reader.GetString(0), out int k) ? k : 0;
+                            string question = reader.GetString(1);
+                            string answer = reader.GetString(2);
+                            string false1 = reader.GetString(3);
+                            string false2 = reader.GetString(4);
+                            string false3 = reader.GetString(5);
+                            string diff = reader.GetString(6);
+                            questionList.Add(new Question(question,answer,false1,false2,diff));
+                        }
+                    }
+
+                    return questionList;
+                }
+            }
+        }
+
         public void Dispose()
         {
             _mySqlConnection.Close();

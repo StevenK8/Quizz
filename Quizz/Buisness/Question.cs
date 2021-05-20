@@ -23,5 +23,14 @@ namespace QuizzNoGood.Buisness
         {
             throw new NotImplementedException();
         }
+
+        public Question(string sentence, string answer, string false1, string false2, string false3)
+        {
+            Sentence = sentence;
+            Answer = answer;
+            False1 = false1;
+            False2 = false2;
+            False3 = false3;
+        }
     }
 }
