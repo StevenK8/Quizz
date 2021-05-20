@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AngleSharp.Dom;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR.Client;
+using QuizzNoGood.Buisness;
 using QuizzNoGood.Models;
 
 namespace QuizzNoGood.Controllers

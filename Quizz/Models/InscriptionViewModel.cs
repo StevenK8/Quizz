@@ -1,11 +1,12 @@
-﻿using QuizzNoGood.Controllers;
+﻿using QuizzNoGood.Buisness;
+using QuizzNoGood.Controllers;
 using QuizzNoGood.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuizzNoGood.ViewModels
+namespace QuizzNoGood.Models
 {
     public class InscriptionViewModel
     {
