@@ -1,8 +1,8 @@
 ﻿"use strict";
 
-var userId = 2;
-var element = document.getElementById("idgame");
-var gameId = element.innerText;
+var urlParams = new URLSearchParams(window.location.search);
+var gameId = urlParams.get('gameId');
+var userId = urlParams.get('userId');
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/GameHub").build();
 

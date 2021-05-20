@@ -5,39 +5,42 @@
 }
 
 <body>
-    <div>
-        <table>
-            <thead> Scores</thead>
-            <tr colspan="2">
-                <td>Pseudo Joueur 1</td>
-                <td>Score </td>
-            </tr>
-            <tr>
-                <td>Pseudo Joueur 3 - Score</td>
-                <td>Pseudo Joueur 4 - Score</td>
-            </tr>
-        </table>
+<div>
+    <table>
+        <thead> Scores</thead>
+        <tr colspan="2">
+            <td>Pseudo Joueur 1</td>
+            <td>Score </td>
+        </tr>
+        <tr>
+            <td>Pseudo Joueur 3 - Score</td>
+            <td>Pseudo Joueur 4 - Score</td>
+        </tr>
+    </table>
 
-    </div>
-    <div>
-        <!--gif (timer) a mettre en haut a droite de la th de la question-->
-       <img src="~/src/" />
-       <table>
-           <thead>
-               <tr>
-                   <th colspan="2"> NumQ - Question </th>
-               </tr>
-           </thead>
-           <!--La bonne réponse s'affcihe en vert à la fin-->
-           <!--Pour chacun des joueurs, la question choisie s'entoure en Blanc/Bleu plus clair-->
-           <tr>
-               <td id="Answer1"></td>
-               <td id="Answer5"></td>
-           </tr>
-           <tr>
-               <td id="Answer3"></td>
-               <td id="Answer4"></td>
-           </tr>
-       </table>
-    </div>
+</div>
+<div>
+    <!--gif (timer) a mettre en haut a droite de la th de la question-->
+    <img src="~/src/" />
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2"> NumQ - Question </th>
+        </tr>
+        </thead>
+        <!--La bonne réponse s'affcihe en vert à la fin-->
+        <!--Pour chacun des joueurs, la question choisie s'entoure en Blanc/Bleu plus clair-->
+        <tr>
+            <td id="Answer1"></td>
+            <td id="Answer5"></td>
+        </tr>
+        <tr>
+            <td id="Answer3"></td>
+            <td id="Answer4"></td>
+        </tr>
+    </table>
+</div>
 </body>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="/js/game.js"></script>

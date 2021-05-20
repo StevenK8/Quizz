@@ -9,9 +9,9 @@
         <a asp-area="" asp-controller="Home" asp-action="Connection">connection</a>
 
         <h1 class="display-4">Welcome</h1>
-        <a asp-area="" asp-controller="Home" asp-action="WaitingHub">Créer un Quiz</a>
+        <a asp-area="" asp-controller="Home" asp-action="GoToWaitingHub">Créer un Quiz</a>
 
-        <form asp-controller="Home" asp-action="WaitingHub" asp-route-isJoin="true" method="post">
+        <form asp-controller="Home" asp-action="GoToWaitingHub" asp-route-isJoin="true" method="post">
             @Html.TextBox("idGame")
             <button type="submit">Rejoindre un Quiz</button>
         </form>
