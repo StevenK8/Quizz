@@ -18,7 +18,7 @@ switch (idInfo) {
         alert("Echec de la connexion. Le pseudo ou le mot de passe est incorrect");
         break;
     case "5":
-        alert("Veuillez vous reconnecter");
+        alert("Veuillez vous connecter");
         break;
     default:
 }

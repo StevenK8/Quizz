@@ -83,7 +83,7 @@ namespace QuizzNoGood.Controllers
             Game.CurrentQuestion = question;
 
             List<string> randomisedAnswers = ShuffleAnswers(question);
-            GameConnection.SendAsync("AskQuestion", question.Sentence, randomisedAnswers);
+            GameConnection.SendAsync("AskQuestion", Game, question.Sentence, randomisedAnswers);
         }
 
         public async void AnswerQuestion(int userId, string answer)
@@ -126,9 +126,9 @@ namespace QuizzNoGood.Controllers
             });
         }
 
-        public void ConnectUser(int idUser)
+        public void ConnectUser(int idUser, string connectionId)
         {
-            Game.ConnectUser(idUser);
+            Game.ConnectUser(idUser, connectionId);
             if (Game.AllUserConnected())
             {
                 AskQuestion();

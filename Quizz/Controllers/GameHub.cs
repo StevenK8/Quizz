@@ -34,14 +34,14 @@ namespace QuizzNoGood.Controllers
         public async Task UserConnectedToGame(int idUser, string idGame)
         {
             var gc = WebContext.GetInstance().GameManager.GetGameById(idGame);
-            gc.ConnectUser(idUser);
+            gc.ConnectUser(idUser, Context.ConnectionId);
         }
 
-        public async Task AskQuestion(Game game, string question, string choices)
+        public async Task AskQuestion(Game game, string question, List<string> choices)
         {
             foreach (var gameUser in game.Users)
             {
-                await Clients.Client(gameUser.ConnectionId).SendAsync("AskQuestion", question, choices);
+                await Clients.Client(gameUser.ConnectionId).SendAsync("AskQuestion", question, choices.ToArray());
             }
         }
 
@@ -50,6 +50,14 @@ namespace QuizzNoGood.Controllers
             foreach (var gameUser in game.Users)
             {
                 await Clients.Client(gameUser.ConnectionId).SendAsync("ReceiveAnswer", answer);
+            }
+        }
+        
+        public async Task EndGame(Game game, List<string> scores)
+        {
+            foreach (var gameUser in game.Users)
+            {
+                await Clients.Client(gameUser.ConnectionId).SendAsync("EndGame", scores.ToArray());
             }
         }
 

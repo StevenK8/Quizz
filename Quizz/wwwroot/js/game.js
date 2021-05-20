@@ -1,14 +1,14 @@
 ﻿"use strict";
 
 var urlParams = new URLSearchParams(window.location.search);
-var idGame = urlParams.get('gameId');
-var idUser = urlParams.get('userId');
+var gameId = urlParams.get('gameId');
+var userId = parseInt(urlParams.get('userId'), 10);
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/GameHub").build();
 
 connection.start().then(function () {
     console.log("Connexion établie");
-    connection.invoke("AskForConnection", userId, gameId).catch(function (err) {
+    connection.invoke("UserConnectedToGame", userId, gameId).catch(function (err) {
         return console.error(err.toString());
     });
 
@@ -16,13 +16,53 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 
-connection.on("UserConnected", function (players) {
-    var element = document.getElementById("playerlist");
-    element.innerHTML = '';
-    players.forEach(id => {
-        var tag = document.createElement("p");
-        var text = document.createTextNode("Joueur Id : " + id);
+connection.on("AskQuestion", function (question, choices) {
+    var questions = document.getElementById("questions");
+    var answers = document.getElementById("answers");
+
+    questions.innerHTML = '';
+    answers.innerHTML = '';
+
+    var tag = document.createElement("p");
+    var text = document.createTextNode(question);
+    tag.appendChild(text);
+    questions.appendChild(tag);
+
+    var i = 1;
+    var divanswers = document.createElement("div");
+    var divbtn = document.createElement("div");
+
+    choices.forEach(choice => {
+        tag = document.createElement("p");
+        text = document.createTextNode(choice);
         tag.appendChild(text);
-        element.appendChild(tag);
+        divanswers.appendChild(tag);
+
+        let btn = document.createElement("button");
+        btn.innerHTML = i;
+        btn.onclick = function () {
+            GiveAnswer(choice);
+        };
+        i = i + 1;
+        divbtn.appendChild(btn);
     })
+
+    answers.appendChild(divanswers);
+    answers.appendChild(divbtn);
 });
+
+function GiveAnswer(choice) {
+    connection.invoke("AnswerQuestion", userId, gameId, choice).catch(function (err) {
+        return console.error(err.toString());
+    });
+}
+
+connection.on("ReceiveAnswer", function (answer) {
+    
+});
+
+
+connection.on("EndGame", function (scores) {
+   
+});
+
