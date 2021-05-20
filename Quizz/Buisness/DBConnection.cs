@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 
-namespace QuizzNoGood.Models
+namespace QuizzNoGood.Buisness
 {
     public class DBConnection : IDisposable
     {
@@ -84,7 +84,25 @@ namespace QuizzNoGood.Models
             }
         }
 
-        public List<Question> SelectQuestion(List<int> theme, List<int> difficulty)
+        public User SelectThemes()
+        {
+            string sql = $"SELECT id, theme, FROM themes";
+            using (MySqlCommand command = new(sql, _mySqlConnection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    if (!reader.Read()) //username c'est la clé donc un seul resultat
+                        return null;
+                    int id = int.TryParse(reader.GetString(0), out int k) ? k : 0;
+                    string theme = reader.GetString(1);
+                    return new Theme(id, theme);
+                }
+            }
+        }
+
+
+
+        public List<Question> SelectQuestions(List<int> theme, List<int> difficulty)
         {
             string themes = "";
             for (int i=0; i<theme.Count; i++){
