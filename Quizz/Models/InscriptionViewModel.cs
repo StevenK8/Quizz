@@ -1,4 +1,5 @@
-﻿using QuizzNoGood.Business;
+﻿using Microsoft.AspNetCore.Mvc;
+using QuizzNoGood.Business;
 using QuizzNoGood.Controllers;
 
 namespace QuizzNoGood.Models
@@ -8,13 +9,14 @@ namespace QuizzNoGood.Models
         public string Login { get; set; }
         public string Password { get; set; }
         public string RepeatedPassword { get; set; }
+        [BindProperty(Name = "ErrorCode", SupportsGet = true)]
+        public int ErrorCode { get; set; }
 
-        public User CreateUserFormInscription()
+        public (User u, int errorCode) CreateUserFormInscription()
         {
-            var (success, message, user) = UserController.UserInscription(Login, Password, RepeatedPassword);
-            if (success)
-                return user;
-            return null;
+            var (errorCode, user) = UserController.UserInscription(Login, Password, RepeatedPassword);
+            return (user, errorCode);
+            
         }
     }
 }

@@ -13,16 +13,16 @@ namespace QuizzNoGood.Controllers
             return null;
         }
 
-        public static (bool success, string message, User user) UserInscription(string username, string password, string repeatedPassword)
+        public static (int errorCode, User user) UserInscription(string username, string password, string repeatedPassword)
         {
             DBConnection DB = new DBConnection();
             if (password != repeatedPassword)
-                return (false, "Passwords does not match", null);
+                return (1, null);
             var u = User.CreateNewUser(username, password);
             if(!DB.InsertUser(u))
-                return (false, "A user with this username already exist", null);
+                return (2, null);
 
-            return (true, "User successfully created", DB.SelectUser(username));
+            return (3, DB.SelectUser(username));
         }
        
     }
