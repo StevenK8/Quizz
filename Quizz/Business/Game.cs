@@ -12,6 +12,7 @@ namespace QuizzNoGood.Business
         public HashSet<Question> QuestionAsked { get; set; }
         public HashSet<Question> QuestionPool { get; set; }
         public Question CurrentQuestion { get; set; }
+        public List<int> Difficulty { get; set; }
 
         public Game(string id)
         {
@@ -19,6 +20,7 @@ namespace QuizzNoGood.Business
             Users = new HashSet<GameUserInfos>();
             QuestionAsked = new HashSet<Question>();
             QuestionPool = new HashSet<Question>();
+            Difficulty = new List<int>(){1,2,3};
         }
 
         public void RegisterUser(User user)

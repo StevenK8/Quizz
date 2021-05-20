@@ -87,7 +87,7 @@ namespace QuizzNoGood.Business
 
         public List<Theme> SelectThemes()
         {
-            string sql = $"SELECT id, theme, FROM themes";
+            string sql = $"SELECT id, theme FROM themes";
             using (MySqlCommand command = new(sql, _mySqlConnection))
             {
                 using (var reader = command.ExecuteReader())
