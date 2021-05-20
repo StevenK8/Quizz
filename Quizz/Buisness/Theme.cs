@@ -1,4 +1,4 @@
-namespace QuizzNoGood.Models
+namespace QuizzNoGood.Buisness
 {
     public class Theme
     {
@@ -22,7 +22,7 @@ namespace QuizzNoGood.Models
         public Theme(int id, string themeName)
         {
             Id = id;
-            Username = username;
+            ThemeName = themeName;
         }
         
         /// <summary>
