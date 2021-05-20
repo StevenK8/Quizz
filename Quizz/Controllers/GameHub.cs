@@ -37,11 +37,19 @@ namespace QuizzNoGood.Controllers
             gc.ConnectUser(idUser);
         }
 
-        public async Task AskQuestion(Game game, Question question)
+        public async Task AskQuestion(Game game, string question, string choices)
         {
             foreach (var gameUser in game.Users)
             {
-                await Clients.Client(gameUser.ConnectionId).SendAsync("AskQuestion", question);
+                await Clients.Client(gameUser.ConnectionId).SendAsync("AskQuestion", question, choices);
+            }
+        }
+
+        public async Task GiveAnswer(Game game, string answer)
+        {
+            foreach (var gameUser in game.Users)
+            {
+                await Clients.Client(gameUser.ConnectionId).SendAsync("ReceiveAnswer", answer);
             }
         }
 

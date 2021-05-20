@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AngleSharp.Dom;
 using Microsoft.AspNetCore.Http;
@@ -74,7 +75,7 @@ namespace QuizzNoGood.Controllers
             GameConnection.SendAsync("AskQuestion", question.Sentence, randomisedAnswers);
         }
 
-        public void AnswerQuestion(int userId, string answer)
+        public async void AnswerQuestion(int userId, string answer)
         {
             Game.SetUserHasAnswered(userId);
             if (Equals(Game.CurrentQuestion.Answer, answer))
@@ -84,7 +85,21 @@ namespace QuizzNoGood.Controllers
 
             if (Game.AllUsersAnswered())
             {
+                await Task.Run(async () =>
+                {
+                    await GameConnection.SendAsync("GiveAnswer", Game, Game.CurrentQuestion.Answer);
 
+                    Thread.Sleep(5000);
+                });
+
+                if (Game.QuestionPool.Count == 0)
+                {
+                    //EndGame();
+                }
+                else
+                {
+                    AskQuestion();
+                }
             }
         }
 
