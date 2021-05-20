@@ -46,11 +46,14 @@ namespace QuizzNoGood.Business
             if (!IsConnected)
                 if (!Connect())
                     throw new Exception("Unable to connect to Database");
-
-            string sql = $"insert into users(username, password) values('{user.Username}', '{user.CryptedPassword}')";
-
+                    
+            
+            string sql = $"insert into users(username, password) values(@Name, '{user.CryptedPassword}')";
+            
             using (MySqlCommand command = new (sql, _mySqlConnection))
             {
+                command.Parameters.AddWithValue("@Name", user.Username);
+                // command.Parameters.AddWithValue("@Password", user.CryptedPassword);
                 try
                 {
                     if (command.ExecuteNonQuery() != 1)
