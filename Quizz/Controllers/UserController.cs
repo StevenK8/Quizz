@@ -1,4 +1,5 @@
-﻿using QuizzNoGood.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using QuizzNoGood.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

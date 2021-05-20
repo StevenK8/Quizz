@@ -14,11 +14,6 @@ namespace QuizzNoGood
     {
         public static void Main(string[] args)
         {
-            var u = User.CreateNewUser(12, "test", "password");
-            u.VerifyPassword("password");
-
-
-
             CreateHostBuilder(args).Build().Run();
         }
 
