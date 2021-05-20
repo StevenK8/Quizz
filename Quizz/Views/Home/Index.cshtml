@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IndexViewModel
+@{
 ViewData["Title"] = "Home Page";
 }
 
@@ -8,12 +9,20 @@ ViewData["Title"] = "Home Page";
 </head>
 
 <body>
-    <div>
-        <div id="Menu" class="container-fluid">
+<div>
+    <div id="Menu" class="container-fluid">
+        @if (Model.IsConnected)
+        {
             <div Class="Button">
                 <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="Profil">Profil</a>
             </div>
+            <div Class="Button">
+                <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="Index" asp-route-isDeconnexion="1">Deconnexion</a>
+            </div>
 
+        }
+        else
+        {
             <div Class="Button">
                 <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="Inscription">Inscription</a>
             </div>
@@ -21,8 +30,9 @@ ViewData["Title"] = "Home Page";
             <div Class="Button">
                 <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="Connection">Connexion</a>
             </div>
-        </div>
-
+        }
+    </div>
+    
 
         <br />
 

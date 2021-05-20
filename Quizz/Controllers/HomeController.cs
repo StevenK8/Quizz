@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using QuizzNoGood.Business;
 using QuizzNoGood.Models;
+using System;
 using System.Diagnostics;
 using System.Linq;
 
@@ -19,9 +20,8 @@ namespace QuizzNoGood.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(InscriptionViewModel inscription, int isInscription, ConnectionViewModel connection, int isConnection)
+        public IActionResult Index(InscriptionViewModel inscription, int isInscription, ConnectionViewModel connection, int isConnection, int isDeconnexion)
         {
-#warning gérer les exceptions
             if (isInscription == 1)
             {
                 (User u, int eCode) = inscription.CreateUserFormInscription();
@@ -29,6 +29,7 @@ namespace QuizzNoGood.Controllers
                 {
                     string s = JsonConvert.SerializeObject(u);
                     HttpContext.Session.SetString(USER, s);
+
                 }
                 else
                 {
@@ -36,7 +37,7 @@ namespace QuizzNoGood.Controllers
                 }
             }
                 
-            if (isConnection == 1)
+            else if (isConnection == 1)
             {
                 User u = connection.Connect();
                 if (u is not null)
@@ -50,7 +51,26 @@ namespace QuizzNoGood.Controllers
                 }
 
             }
-            return View();
+
+            else if (isDeconnexion == 1)
+            {
+                HttpContext.Session.Remove(USER);
+            }
+
+            var stringUser = HttpContext.Session.GetString(USER);
+            Business.User user = null;
+            if(stringUser is not null)
+            {
+                try
+                {
+                    user = JsonConvert.DeserializeObject<User>(stringUser);
+                }
+                catch (Exception e)
+                {
+                    //renvoyer une erreur
+                }
+            }
+            return View(new IndexViewModel() { IsConnected = user is not null});
         }
         
         public IActionResult Profil()
