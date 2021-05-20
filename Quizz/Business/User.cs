@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Ganss.XSS;
 
-namespace QuizzNoGood.Buisness
+namespace QuizzNoGood.Business
 {
     public class User
     {

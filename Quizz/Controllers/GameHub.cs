@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using QuizzNoGood.Buisness;
+using QuizzNoGood.Business;
 using QuizzNoGood.Models;
 
 namespace QuizzNoGood.Controllers

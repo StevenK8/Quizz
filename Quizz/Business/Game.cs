@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace QuizzNoGood.Buisness
+namespace QuizzNoGood.Business
 {
     public class Game
     {

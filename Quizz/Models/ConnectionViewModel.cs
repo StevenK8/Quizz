@@ -1,10 +1,5 @@
-﻿using QuizzNoGood.Buisness;
+﻿using QuizzNoGood.Business;
 using QuizzNoGood.Controllers;
-using QuizzNoGood.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuizzNoGood.Models
 {

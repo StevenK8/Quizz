@@ -1,4 +1,4 @@
-namespace QuizzNoGood.Buisness
+namespace QuizzNoGood.Business
 {
     public class Theme
     {

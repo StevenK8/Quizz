@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 
-namespace QuizzNoGood.Buisness
+namespace QuizzNoGood.Business
 {
     public class DBConnection : IDisposable
     {
@@ -84,7 +84,7 @@ namespace QuizzNoGood.Buisness
             }
         }
 
-        public User SelectThemes()
+        public Theme SelectThemes()
         {
             string sql = $"SELECT id, theme, FROM themes";
             using (MySqlCommand command = new(sql, _mySqlConnection))
