@@ -9,7 +9,7 @@ for details on configuring this project to bundle and minify static web assets. 
 .Button {
     background: transparent;
     border: none;
-    background-image: url('../src/Illustration_resized.png');
+    /* background-image: url('../src/Illustration_resized.png'); */
     background-position:center;
     background-size: contain;
     background-repeat: no-repeat;
