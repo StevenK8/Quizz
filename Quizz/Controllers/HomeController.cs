@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using QuizzNoGood.ViewModels;
+using QuizzNoGood.Buisness;
 
 namespace QuizzNoGood.Controllers
 {
@@ -22,7 +22,8 @@ namespace QuizzNoGood.Controllers
 
         public IActionResult Index(InscriptionViewModel inscription, int isInscription)
         {
-            if(isInscription == 1)
+#warning gérer les exceptions
+            if (isInscription == 1)
                 inscription.CreateUserFormInscription();
             return View();
         }
