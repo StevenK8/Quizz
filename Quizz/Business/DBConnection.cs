@@ -91,7 +91,7 @@ namespace QuizzNoGood.Business
             {
                 using (var reader = command.ExecuteReader())
                 {
-                    if (!reader.Read()) //username c'est la clé donc un seul resultat
+                    if (!reader.Read())
                         return null;
                     int id = int.TryParse(reader.GetString(0), out int k) ? k : 0;
                     string theme = reader.GetString(1);
@@ -130,8 +130,7 @@ namespace QuizzNoGood.Business
                 using (var reader = command.ExecuteReader())
                 {
                     List<Question> questionList = new List<Question>();
-                    if (!reader.Read())
-                        return null;
+                   
                     if(reader.HasRows){
                         while(reader.Read()){
                             int id = int.TryParse(reader.GetString(0), out int k) ? k : 0;
@@ -143,6 +142,8 @@ namespace QuizzNoGood.Business
                             string diff = reader.GetString(6);
                             questionList.Add(new Question(question,answer,false1,false2,diff));
                         }
+                    }else{
+                        return null;
                     }
 
                     return questionList;
