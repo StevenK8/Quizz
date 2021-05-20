@@ -1,5 +1,10 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+#test {
+    border:dashed;
+    border-color:aquamarine;
+}
+
 
 .Button {
     background: transparent;
@@ -16,20 +21,22 @@ for details on configuring this project to bundle and minify static web assets. 
 
 .Button:hover {
     color:white;
-    text-decoration:none; 
+    text-decoration:none;
+    text-shadow: rgb(255,255,255) 5px 5px 5px; 
+}
+
+.Form {
+    padding:10%;
 }
 
 #Return {
-    text-align:center;
-}
-
-#Profil {
-    text-align:left;
+    padding-top: 0.5%;
 }
 
 body {
     background-color: #A92B30;
     text-align:center;
+    color:white;
 } /* TODO Ne prend pas le header/prend le footer*/
 
 
@@ -42,7 +49,6 @@ body {
     padding: 15%; /*important
     font-size: 100%; /*important
     */
-    text-align: center;
     color: white;
     text-decoration: none;
     display: inline-block;
@@ -52,6 +58,8 @@ body {
 
 img.Logo {
     align-self:center;
+    width:50%;
+    height:50%;
 }
 
 .flex {
