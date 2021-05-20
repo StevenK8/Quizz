@@ -4,11 +4,12 @@
 
 <body>
     <div>
-        <a asp-area="" asp-controller="Home" asp-action="Profil">Profil</a>
-        <a asp-area="" asp-controller="Home" asp-action="Inscription">Inscription</a>
-        <a asp-area="" asp-controller="Home" asp-action="Connection">connection</a>
+        <a asp-area="" asp-controller="Home" asp-action="Profil" class="Button" id="Profil">A-   Profil</a>
+        <a asp-area="" asp-controller="Home" asp-action="Inscription" class="Button" id="Profil">B-   Inscription</a>
+        <a asp-area="" asp-controller="Home" asp-action="Connection" class="Button" id="Profil">C-   Connection</a>
 
-        <h1 class="display-4">Welcome</h1>
+        <br />
+        
         <a asp-area="" asp-controller="Home" asp-action="GoToWaitingHub">Créer un Quiz</a>
 
         <form asp-controller="Home" asp-action="GoToWaitingHub" asp-route-isJoin="true" method="post">
