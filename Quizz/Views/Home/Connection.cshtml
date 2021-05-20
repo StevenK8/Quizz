@@ -4,14 +4,15 @@
 }
 
 <body>
-    <div>
+    <div class="container">
+        <script src="/js/error.js" idInfo="@Model.ErrorCode"></script>
 
         <a asp-area="" asp-controller="Home" asp-action="Index"s class="Button">Return</a>
-        <form method="post" class="Form">
+        <form method="post" class="Form" id="connectionForm">
             <label for="login">Pseudo</label>
             <input asp-for="Login" type="text" name="login" id="login" required /> <br />
             <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" required /> <br />
+            <input type="password" name="password" id="password" required />
             <input type="submit" value="Valider" class="Button_submit" />
          </form>
     </div>
