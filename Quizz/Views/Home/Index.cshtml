@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 <head>
@@ -7,17 +8,24 @@
 <body>
 <div>
     <div id="Menu">
-        <div Class="Button" >
-            <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Profil">Profil</a>
-        </div>
+        @if (Model.IsConnected)
+        {
+            <div Class="Button">
+                <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Profil">Profil</a>
+            </div>
 
-        <div Class="Button">
-            <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Inscription">Inscription</a>
-        </div>
 
-        <div Class="Button">
-            <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Connection">Connexion</a>
-        </div>
+        }
+        else
+        {
+            <div Class="Button">
+                <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Inscription">Inscription</a>
+            </div>
+
+            <div Class="Button">
+                <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Connection">Connexion</a>
+            </div>
+        }
     </div>
     
 
