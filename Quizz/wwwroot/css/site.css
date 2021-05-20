@@ -12,10 +12,11 @@ for details on configuring this project to bundle and minify static web assets. 
     /* background-image: url('../src/Illustration_resized.png'); */
     background-size: contain;
     background-repeat: no-repeat;
+    text-align:center;
     padding: 5%;
     padding-top: 0.75%;
     padding-bottom: 2%;
-    Width: 100%;
+    Width: 50%;
 }
 
 
@@ -25,8 +26,11 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 #Menu {
-	display: flex;
-	flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    width:50%;
+    border: dashed;
+    border-color: aquamarine;
 }
 
 .Button:hover {
@@ -140,6 +144,7 @@ html {
 
 .footer {
   position: absolute;
+  color:white;
   bottom: 0;
   width: 100%;
   white-space: nowrap;

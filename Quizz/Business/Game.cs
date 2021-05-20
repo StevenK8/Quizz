@@ -28,12 +28,13 @@ namespace QuizzNoGood.Business
             Users.Add(new GameUserInfos(user));
         }
 
-        public void ConnectUser(int userId)
+        public void ConnectUser(int userId, string connectionId)
         {
             var user = Users.FirstOrDefault(u => u.User.Id == userId);
 
             if (user != null)
             {
+                user.ConnectionId = connectionId;
                 user.IsConnected = true;
             }
         }

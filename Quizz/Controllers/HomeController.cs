@@ -85,38 +85,38 @@ namespace QuizzNoGood.Controllers
             bool isJoinb = Equals(isJoin, "true");
 
             string s = HttpContext.Session.GetString(USER);
-            User u = JsonConvert.DeserializeObject<User>(s);
-
-            if (u != null)
+            if (s != null)
             {
-                if (isJoinb)
+                User u = JsonConvert.DeserializeObject<User>(s);
+                if (u != null)
                 {
-                    var id = Request.Form["idGame"].First();
-
-                    WebContext.GetInstance().GameManager.RegisterUser(id, u);
-                    return RedirectToAction("WaitingHub", new
+                    if (isJoinb)
                     {
-                        gameId = id,
-                        userId = 1,
-                    });
+                        var id = Request.Form["idGame"].First();
 
-                }
-                else
-                {
-                    var id = WebContext.GetInstance().GameManager.CreateGame();
-                    WebContext.GetInstance().GameManager.RegisterUser(id, new User(2, "test2", "blbllb"));
-                    return RedirectToAction("WaitingHub", new
+                        WebContext.GetInstance().GameManager.RegisterUser(id, u);
+                        return RedirectToAction("WaitingHub", new
+                        {
+                            gameId = id,
+                            userId = u.Id,
+                        });
+
+                    }
+                    else
                     {
-                        gameId = id,
-                        userId = 2,
-                    });
+                        var id = WebContext.GetInstance().GameManager.CreateGame();
+                        WebContext.GetInstance().GameManager.RegisterUser(id, u);
+
+                        return RedirectToAction("WaitingHub", new
+                        {
+                            gameId = id,
+                            userId = u.Id,
+                        });
+                    }
                 }
             }
-            else
-            {
-                return RedirectToAction("Connection", new { errorCode = 5 });
-            }
-            
+
+            return RedirectToAction("Connection", new { errorCode = 5 });
         }
 
         public IActionResult WaitingHub(string gameId, int userId)
@@ -125,9 +125,28 @@ namespace QuizzNoGood.Controllers
         }
 
 
-        public IActionResult GameView(string gameId)
+        public IActionResult GoToGameView(string gameId)
         {
-            WebContext.GetInstance().GameManager.StartGame(gameId);
+            string s = HttpContext.Session.GetString(USER);
+            if (s != null)
+            {
+                User u = JsonConvert.DeserializeObject<User>(s);
+                if (u != null)
+                {
+                    WebContext.GetInstance().GameManager.StartGame(gameId);
+                    return RedirectToAction("GameView", new
+                    {
+                        gameId = gameId,
+                        userId = u.Id
+                    });
+                }
+            }
+
+            return RedirectToAction("Connection", new { errorCode = 5 });
+        }
+
+        public IActionResult GameView()
+        {
             return View();
         }
     }

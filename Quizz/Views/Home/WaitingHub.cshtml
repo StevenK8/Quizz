@@ -15,22 +15,18 @@
         <!--Lance la Partie-->
         <button>Commencer la partie </button>
     </div>
-
+    
     <table id="test">
         <thead>
             <tr>
                 <th>Joueurs</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="playerlist">
             <!--Affiche le pseudo des joueurs ayant rejoint la partie, 1 par ligne-->
-            <tr>Player 1</tr>
-            <tr>Player 2</tr>
+
         </tbody>
     </table>
-
-
-
 </body>
 
 
@@ -39,10 +35,7 @@
 <!-- PAS VIRER en dessous-->
 <h1 id="idgame">@Model.Id</h1>
 
-<a asp-controller="Home" asp-action="GameView" asp-route-gameId="@Model.Id" method="post">lancer la partie</a>
+<a asp-controller="Home" asp-action="GoToGameView" asp-route-gameId="@Model.Id" method="post">lancer la partie</a>
 
-<div id="playerlist">
-
-</div>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="/js/waitinghub.js"></script>
