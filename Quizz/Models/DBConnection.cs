@@ -84,7 +84,7 @@ namespace QuizzNoGood.Models
             }
         }
 
-        public List<Question> SelectUser(List<int> theme, List<int> difficulty)
+        public List<Question> SelectQuestion(List<int> theme, List<int> difficulty)
         {
             string themes = "";
             for (int i=0; i<theme.Count; i++){
