@@ -12,17 +12,27 @@ for details on configuring this project to bundle and minify static web assets. 
     background-image: url('../src/Illustration_resized.png');
     background-size: contain;
     background-repeat: no-repeat;
-    color: white;
-    text-decoration: none;
     padding: 5%;
     padding-top: 0.75%;
     padding-bottom: 2%;
+    Width: 100%;
+}
+
+
+.Button a {
+	color: white;
+	text-decoration: none;
+}
+
+#Menu {
+	display: flex;
+	flex-direction: row;
 }
 
 .Button:hover {
-    color:white;
-    text-decoration:none;
-    text-shadow: rgb(255,255,255) 5px 5px 5px; 
+    color: white;
+    text-decoration: none;
+    text-shadow: rgb(255,255,255) 5px 5px 5px;
 }
 
 .Form {

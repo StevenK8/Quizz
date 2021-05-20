@@ -83,27 +83,40 @@ namespace QuizzNoGood.Controllers
         {
             //TODO des tests ici
             bool isJoinb = Equals(isJoin, "true");
-            if (isJoinb)
-            {
-                var id = Request.Form["idGame"].First();
-                WebContext.GetInstance().GameManager.RegisterUser(id, new User(1, "test1", "blbllb"));
-                return RedirectToAction("WaitingHub", new
-                {
-                    gameId = id,
-                    userId = 1,
-                });
 
+            string s = HttpContext.Session.GetString(USER);
+            User u = JsonConvert.DeserializeObject<User>(s);
+
+            if (u != null)
+            {
+                if (isJoinb)
+                {
+                    var id = Request.Form["idGame"].First();
+
+                    WebContext.GetInstance().GameManager.RegisterUser(id, u);
+                    return RedirectToAction("WaitingHub", new
+                    {
+                        gameId = id,
+                        userId = 1,
+                    });
+
+                }
+                else
+                {
+                    var id = WebContext.GetInstance().GameManager.CreateGame();
+                    WebContext.GetInstance().GameManager.RegisterUser(id, new User(2, "test2", "blbllb"));
+                    return RedirectToAction("WaitingHub", new
+                    {
+                        gameId = id,
+                        userId = 2,
+                    });
+                }
             }
             else
             {
-                var id = WebContext.GetInstance().GameManager.CreateGame();
-                WebContext.GetInstance().GameManager.RegisterUser(id, new User(2, "test2", "blbllb"));
-                return RedirectToAction("WaitingHub", new
-                {
-                    gameId = id,
-                    userId = 2,
-                });
+                return RedirectToAction("Connection", new { errorCode = 5 });
             }
+            
         }
 
         public IActionResult WaitingHub(string gameId, int userId)

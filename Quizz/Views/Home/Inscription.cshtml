@@ -5,13 +5,14 @@
 
 <body>
     <div class="container">
+        <script src="/js/error.js" idInfo="@Model.ErrorCode"></script>
 
         <a asp-area="" asp-controller="Home" asp-action="Index" class="Button" id="Return">Retour</a>
         <form method="post" id="test" class="Form">
             <label for="login">Pseudo</label>
-            <input asp-for="Login" type="text" name="login" id="login" maxlength="18" required /> <br/>
+            <input asp-for="Login" type="text" name="login" id="login" maxlength="18" required /> <br />
             <label for="password">Mot de passe</label>
-            <input asp-for="Password" type="password" name="password" id="password" required/>
+            <input asp-for="Password" type="password" name="password" id="password" required />
             <label for="repeatedPassword">Confirmer le mot de passe</label>
             <input asp-for="RepeatedPassword" type="password" name="repeatedPassword" id="confPassword" required /> <br />
 

@@ -15,7 +15,7 @@ namespace QuizzNoGood.Business
         private string _username;
         public string Username {
             get => _username;
-            private set
+            set
             {
 #warning TODO
                 var sanitizer = new HtmlSanitizer();
@@ -45,6 +45,11 @@ namespace QuizzNoGood.Business
         {
             Username = username;
             CryptedPassword = cryptedPassword;
+        }
+
+        public User()
+        {
+
         }
 
 
