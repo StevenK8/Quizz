@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 
-namespace QuizzNoGood.Models
+namespace QuizzNoGood.Buisness
 {
     public class DBConnection : IDisposable
     {

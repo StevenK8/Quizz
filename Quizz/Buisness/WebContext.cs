@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using QuizzNoGood.Controllers;
 
-namespace QuizzNoGood.Models
+namespace QuizzNoGood.Buisness
 {
     public class WebContext
     {
