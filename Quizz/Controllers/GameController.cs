@@ -94,13 +94,25 @@ namespace QuizzNoGood.Controllers
 
                 if (Game.QuestionPool.Count == 0)
                 {
-                    //EndGame();
+                    EndGame();
                 }
                 else
                 {
                     AskQuestion();
                 }
             }
+        }
+
+        private async void EndGame()
+        {
+            await Task.Run(async () =>
+            {
+                await GameConnection.SendAsync("EndGame", Game);
+
+                Thread.Sleep(5000);
+
+                await GameConnection.SendAsync("DisplayScores", Game);
+            });
         }
 
         public void ConnectUser(int idUser)

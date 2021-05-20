@@ -79,24 +79,36 @@ namespace QuizzNoGood.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult WaitingHub(string isJoin)
+        public IActionResult GoToWaitingHub(string isJoin)
         {
             //TODO des tests ici
-            bool isJoinb = Equals(isJoin, "true"); 
+            bool isJoinb = Equals(isJoin, "true");
             if (isJoinb)
             {
                 var id = Request.Form["idGame"].First();
-                WebContext.GetInstance().GameManager.RegisterUser(id, new User(1,"test1","blbllb"));
-                return View(new WaitingHubViewModel(id));
+                WebContext.GetInstance().GameManager.RegisterUser(id, new User(1, "test1", "blbllb"));
+                return RedirectToAction("WaitingHub", new
+                {
+                    gameId = id,
+                    userId = 1,
+                });
 
             }
             else
             {
-                //HttpContext.Session.SetString("user","ze");
                 var id = WebContext.GetInstance().GameManager.CreateGame();
                 WebContext.GetInstance().GameManager.RegisterUser(id, new User(2, "test2", "blbllb"));
-                return View(new WaitingHubViewModel(id));
+                return RedirectToAction("WaitingHub", new
+                {
+                    gameId = id,
+                    userId = 2,
+                });
             }
+        }
+
+        public IActionResult WaitingHub(string gameId, int userId)
+        {
+            return View(new WaitingHubViewModel(gameId));
         }
 
 
