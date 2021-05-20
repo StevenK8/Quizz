@@ -1,17 +1,20 @@
 ﻿@model IndexViewModel
 @{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
+
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
+
 <body>
 <div>
-    <div id="Menu">
+    <div id="Menu" class="container-fluid">
         @if (Model.IsConnected)
         {
             <div Class="Button">
-                <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Profil">Profil</a>
+                <a asp-area="" asp-controller="Home"  class="btn btn-primary" asp-action="Profil">Profil</a>
             </div>
 
 
@@ -19,47 +22,57 @@
         else
         {
             <div Class="Button">
-                <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Inscription">Inscription</a>
+                <a asp-area="" asp-controller="Home" class="btn btn-primary"  asp-action="Inscription">Inscription</a>
             </div>
 
             <div Class="Button">
-                <a asp-area="" asp-controller="Home" class="btn btn-outline-primary" asp-action="Connection">Connexion</a>
+                <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="Connection">Connexion</a>
             </div>
         }
     </div>
     
 
-    <br/>
+        <br />
 
-    <a asp-area="" asp-controller="Home" asp-action="GoToWaitingHub">Créer un Quiz</a>
+        <div class="container-sm">
+            <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="GoToWaitingHub">Créer un Quiz</a>
 
-    <form asp-controller="Home" asp-action="GoToWaitingHub" asp-route-isJoin="true" method="post">
-        @Html.TextBox("idGame")
-        <button type="sumbit" class="btn btn-outline-primary">Rejoindre un Quiz</button>
-        
-    </form>
+            <form asp-controller="Home" asp-action="GoToWaitingHub" asp-route-isJoin="true" method="post">
+                <!-- @Html.TextBox("idGame") -->
+                <div class="input-group mb-3 w-50">
+                    <input type="text" class="form-control" placeholder="Numéro de partie"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <span class="input-group-text btn btn-primary" id="basic-addon2">Rejoindre un Quiz</span>
+                </div>
 
-    <div class="flex">
-        <img src="/src/Logo_ Projet.png" class="Logo" alt="" />
+                <!-- <button type="sumbit" class="btn btn-primary">Rejoindre un Quiz</button> -->
 
-        <div>
-            Difficultés <br />
-            <button class="btn btn-outline-primary">Facile</button>
-            <button class="btn btn-outline-primary">Moyen</button>
-            <button class="btn btn-outline-primary">Difficile</button>
-            <br />
-            <br />
+            </form>
         </div>
-        
-        <div id="Menu">
-            <div Class="Button">
-                <a asp-area="" asp-page="/WaitingHub">A Timer</a>
+
+        <div class="flex">
+            <img src="/src/Logo_ Projet.png" class="img-fluid" class="Logo" alt="" />
+
+            <div>
+                Difficultés <br />
+                <button class="btn btn-secondary">Facile</button>
+                <button class="btn btn-secondary">Moyen</button>
+                <button class="btn btn-secondary">Difficile</button>
+                <br />
+                <br />
             </div>
-        </div>
-        
+
+            <div id="Menu">
+                <div Class="Button">
+                    <a asp-area="" asp-page="/WaitingHub">A Timer</a>
+                </div>
+            </div>
+
             <!--<a asp-area="" asp-page="/Themes" class="Button">B Theme</a>-->
             <!--<a asp-area="" asp-page="/WaitingHub" class="Button">C Mort Subite</a>-->
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
 </body>

@@ -7,16 +7,20 @@
     <div class="container">
         <script src="/js/error.js" idInfo="@Model.ErrorCode"></script>
 
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="Button" id="Return">Retour</a>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-info" id="Return">Retour</a>
         <form method="post" id="test" class="Form">
-            <label for="login">Pseudo</label>
-            <input asp-for="Login" type="text" name="login" id="login" maxlength="18" required /> <br />
-            <label for="password">Mot de passe</label>
-            <input asp-for="Password" type="password" name="password" id="password" required/> <br />
-            <label for="repeatedPassword">Confirmer le mot de passe</label>
-            <input asp-for="RepeatedPassword" type="password" name="repeatedPassword" id="confPassword" required /> <br />
-
-            <input type="submit" value="Valider" class="Button_submit" asp-controller="Home"
+            
+            <div class="form-floating mb-3">
+                <input asp-for="Login" type="text" class="form-control" name="login" id="login" maxlength="18" placeholder="Username" required>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Mot de passe"><br />
+            </div>
+            <div class="form-floating">
+                <input asp-for="RepeatedPassword" type="password" name="repeatedPassword" class="form-control" id="confPassword" placeholder="Confirmer le mot de passe" required><br />
+            </div>
+                        
+            <input type="submit" value="Valider" class="btn btn-primary" asp-controller="Home"
                    asp-route-isInscription="1"
                    asp-action="Index" />
         </form>
