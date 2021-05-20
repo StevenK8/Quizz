@@ -6,14 +6,14 @@
 <body>
     <div class="container">
 
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="Button">Return</a>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="Button" id="Return">Return</a>
         <form method="post" class="Form" id="inscriptionForm">
             <label for="login">Pseudo</label>
-            <input asp-for="Login" type="text" name="login" id="login" maxlength="18" required />
+            <input asp-for="Login" type="text" name="login" id="login" maxlength="18" required /> <br/>
             <label for="password">Mot de passe</label>
-            <input asp-for="Password" type="password" name="password" id="password" required/>
+            <input asp-for="Password" type="password" name="password" id="password" required/> <br />
             <label for="repeatedPassword">Confirmer le mot de passe</label>
-            <input asp-for="RepeatedPassword" type="password" name="repeatedPassword" id="confPassword" required />
+            <input asp-for="RepeatedPassword" type="password" name="repeatedPassword" id="confPassword" required /> <br />
 
             <input type="submit" value="Valider" class="Button_submit" asp-controller="Home"
                    asp-route-isInscription="1"
