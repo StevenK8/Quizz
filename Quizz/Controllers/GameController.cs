@@ -84,6 +84,17 @@ namespace QuizzNoGood.Controllers
 
             List<string> randomisedAnswers = ShuffleAnswers(question);
             GameConnection.SendAsync("AskQuestion", question.Sentence, randomisedAnswers);
+            //Create timer
+            //Quand fin GiveAnswer à créer
+            //await GameConnection.SendAsync("GiveAnswer", Game, Game.CurrentQuestion.Answer);
+            //set to null
+            //appeler Game.ResetUsermachin
+            //Appeler la nouvelle fonction
+
+            //Lancer stopwatch global au Gamecontroler
+            //GameUserInfo rajouter propriete Time span pour le temps mis a répondre
+            //Stop à la réponse
+
         }
 
         public async void AnswerQuestion(int userId, string answer)
@@ -96,6 +107,7 @@ namespace QuizzNoGood.Controllers
 
             if (Game.AllUsersAnswered())
             {
+                //En faire une fonction
                 await Task.Run(async () =>
                 {
                     await GameConnection.SendAsync("GiveAnswer", Game, Game.CurrentQuestion.Answer);
