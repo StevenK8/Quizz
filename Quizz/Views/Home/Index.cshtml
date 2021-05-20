@@ -14,15 +14,17 @@ ViewData["Title"] = "Home Page";
         @if (Model.IsConnected)
         {
             <div Class="Button">
-                <a asp-area="" asp-controller="Home"  class="btn btn-primary" asp-action="Profil">Profil</a>
+                <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="Profil">Profil</a>
             </div>
-
+            <div Class="Button">
+                <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="Index" asp-route-isDeconnexion="1">Deconnexion</a>
+            </div>
 
         }
         else
         {
             <div Class="Button">
-                <a asp-area="" asp-controller="Home" class="btn btn-primary"  asp-action="Inscription">Inscription</a>
+                <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="Inscription">Inscription</a>
             </div>
 
             <div Class="Button">

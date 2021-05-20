@@ -20,7 +20,7 @@ namespace QuizzNoGood.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(InscriptionViewModel inscription, int isInscription, ConnectionViewModel connection, int isConnection)
+        public IActionResult Index(InscriptionViewModel inscription, int isInscription, ConnectionViewModel connection, int isConnection, int isDeconnexion)
         {
             if (isInscription == 1)
             {
@@ -37,7 +37,7 @@ namespace QuizzNoGood.Controllers
                 }
             }
                 
-            if (isConnection == 1)
+            else if (isConnection == 1)
             {
                 User u = connection.Connect();
                 if (u is not null)
@@ -50,6 +50,11 @@ namespace QuizzNoGood.Controllers
                     return RedirectToAction("Connection", new { errorCode = 4 });
                 }
 
+            }
+
+            else if (isDeconnexion == 1)
+            {
+                HttpContext.Session.Remove(USER);
             }
 
             var stringUser = HttpContext.Session.GetString(USER);
