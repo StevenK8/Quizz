@@ -2,12 +2,9 @@
 
 var urlParams = new URLSearchParams(window.location.search);
 var gameId = urlParams.get('gameId');
-var userId = urlParams.get('userId');
-
+var userId = parseInt(urlParams.get('userId'),10);
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/GameHub").build();
-
-
 
 connection.start().then(function () {
     console.log("Connexion établie");
@@ -22,12 +19,13 @@ connection.start().then(function () {
 connection.on("UserConnected", function (players) {
     var element = document.getElementById("playerlist");
     element.innerHTML = '';
-    players.forEach(id => {
-        var tag = document.createElement("p");
-        var text = document.createTextNode("Joueur Id : " + id);
-        tag.appendChild(text);
-        element.appendChild(tag);
-    })
+    players.forEach(name => {
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        var text = document.createTextNode(name);
+        tr.appendChild(td.appendChild(text));
+        element.appendChild(tr);
+    });
 });
 
 connection.on("GameStarted", function () {
