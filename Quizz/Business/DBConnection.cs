@@ -76,6 +76,7 @@ namespace QuizzNoGood.Business
                 {
                     if (!reader.Read()) //username c'est la clé donc un seul resultat
                         return null;
+                        
                     int id = int.TryParse(reader.GetString(0), out int k) ? k : 0;
                     string uname = reader.GetString(1);
                     string psw = reader.GetString(2);
@@ -84,18 +85,27 @@ namespace QuizzNoGood.Business
             }
         }
 
-        public Theme SelectThemes()
+        public List<Theme> SelectThemes()
         {
             string sql = $"SELECT id, theme, FROM themes";
             using (MySqlCommand command = new(sql, _mySqlConnection))
             {
                 using (var reader = command.ExecuteReader())
                 {
-                    if (!reader.Read())
+                    List<Theme> themeList = new List<Theme>();
+
+                    if(reader.HasRows){
+                        while(reader.Read()){
+                            int id = int.TryParse(reader.GetString(0), out int k) ? k : 0;
+                            string theme = reader.GetString(1);
+                            themeList.Add(new Theme(id, theme));
+                        }
+                    }else{
                         return null;
-                    int id = int.TryParse(reader.GetString(0), out int k) ? k : 0;
-                    string theme = reader.GetString(1);
-                    return new Theme(id, theme);
+                    }
+
+                    return themeList;
+
                 }
             }
         }
