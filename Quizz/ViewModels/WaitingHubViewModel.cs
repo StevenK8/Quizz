@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 using QuizzNoGood.Controllers;
 
-namespace QuizzNoGood.Models
+namespace QuizzNoGood.ViewModels
 {
     public class WaitingHubViewModel
     {

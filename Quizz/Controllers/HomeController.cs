@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using QuizzNoGood.ViewModels;
 
 namespace QuizzNoGood.Controllers
 {
@@ -19,9 +20,10 @@ namespace QuizzNoGood.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(InscriptionViewModel inscription, int isInscription)
         {
-
+            if(isInscription == 1)
+                inscription.CreateUserFormInscription();
             return View();
         }
         
@@ -71,11 +73,6 @@ namespace QuizzNoGood.Controllers
             }
         }
 
-        public IActionResult UserInscription(InscriptionViewModel inscription)
-        {
-            inscription.CreateUserFormInscription();
-            return View();
-        }
 
         public IActionResult GameView(string gameId)
         {

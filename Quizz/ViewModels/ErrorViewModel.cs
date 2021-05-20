@@ -1,6 +1,6 @@
 using System;
 
-namespace QuizzNoGood.Models
+namespace QuizzNoGood.ViewModels
 {
     public class ErrorViewModel
     {
