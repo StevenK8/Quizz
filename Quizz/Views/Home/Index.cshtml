@@ -37,7 +37,7 @@ ViewData["Title"] = "Home Page";
         <br />
 
         <div class="container-sm">
-            <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="GoToWaitingHub">Créer un Quiz</a>
+            <a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="GoToWaitingHub" asp-route-isJoin="0">Créer un Quiz</a>
 
             <form asp-controller="Home" asp-action="GoToWaitingHub" asp-route-isJoin="true" method="post">
                 <!-- @Html.TextBox("idGame") -->
@@ -66,8 +66,8 @@ ViewData["Title"] = "Home Page";
 
             <div id="Menu" class="container ">
                 <div Class="Button d-grid gap-2">
-                    <a class="btn btn-primary btn-lg" asp-area="" asp-page="/WaitingHub">Timer</a>
-                    <a class="btn btn-primary btn-lg" asp-area="" asp-page="/WaitingHub">Score</a>
+                    <a asp-area="" asp-controller="Home" class="btn btn-primary btn-lg" asp-action="GoToWaitingHub" asp-route-isJoin="0" asp-route-isTimed="1">Créer un Quiz Timé</a>
+                    <a asp-area="" asp-controller="Home" class="btn btn-primary btn-lg" asp-action="GoToWaitingHub" asp-route-isJoin="0" asp-route-isTimed="0">Créer un Quiz Classique</a>
                 </div>
             </div>
 

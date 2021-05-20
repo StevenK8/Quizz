@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AngleSharp.Dom;
-using Microsoft.AspNetCore.Http;
+using System.Timers;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.SignalR.Client;
 using QuizzNoGood.Business;
-using QuizzNoGood.Models;
 
 namespace QuizzNoGood.Controllers
 {
     public class GameController
     {
+        private System.Timers.Timer Timer { get; set; }
+        private Stopwatch Stopwatch { get; set; }
+
         public Game Game { get; }
 
         public HubConnection GameConnection { get; private set; }
@@ -21,6 +24,7 @@ namespace QuizzNoGood.Controllers
         {
             Game = game;
             Connect();
+            Stopwatch = new Stopwatch();
         }
 
         public void StartGame()
@@ -85,44 +89,79 @@ namespace QuizzNoGood.Controllers
             List<string> randomisedAnswers = ShuffleAnswers(question);
 
             GameConnection.SendAsync("AskQuestion", Game, question.Sentence, randomisedAnswers);
-            //Create timer
-            //Quand fin GiveAnswer à créer
-            //await GameConnection.SendAsync("GiveAnswer", Game, Game.CurrentQuestion.Answer);
-            //set to null
-            //appeler Game.ResetUsermachin
-            //Appeler la nouvelle fonction
 
-            //Lancer stopwatch global au Gamecontroler
-            //GameUserInfo rajouter propriete Time span pour le temps mis a répondre
-            //Stop à la réponse
+            if (Game.IsTimed)
+            {
+                Timer = new System.Timers.Timer(30000);
+                Timer.Elapsed += TimerOnElapsed;
+                Timer.Enabled = true;
+                Timer.AutoReset = false;
+
+                if (Stopwatch.IsRunning)
+                {
+                    Stopwatch.Restart();
+                }
+                else
+                {
+                    Stopwatch.Start();
+                }
+            }
         }
 
-        public async void AnswerQuestion(int userId, string answer)
+        private void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
+            GiveAnswer();
+        }
+
+        private async void GiveAnswer()
+        {
+            var question = Game.CurrentQuestion;
+            await GameConnection.SendAsync("GiveAnswer", Game, Game.CurrentQuestion.Answer);
+            Game.CurrentQuestion = null;
+            Game.ResetUsersHasAnswered();
+            AskQuestionOrEndGame(question.Answer);
+        }
+
+        public void AnswerQuestion(int userId, string answer)
+        {
+            TimeSpan? elapsed = null;
+            if (Game.IsTimed)
+            {
+                elapsed = Stopwatch.Elapsed;
+            }
+                
             Game.SetUserHasAnswered(userId);
             if (Equals(Game.CurrentQuestion.Answer, answer))
             {
-                Game.AddPointToUser(userId);
+                Game.AddPointToUser(userId, elapsed);
             }
 
             if (Game.AllUsersAnswered())
             {
-                //En faire une fonction
-                await Task.Run(async () =>
-                {
-                    await GameConnection.SendAsync("GiveAnswer", Game, Game.CurrentQuestion.Answer);
+                Timer.Enabled = false;
+                Timer.Stop();
+                Timer.Close();
+                AskQuestionOrEndGame(Game.CurrentQuestion.Answer);
+            }
+        }
 
-                    Thread.Sleep(5000);
-                });
+        private async void AskQuestionOrEndGame(string answer)
+        {
+            //En faire une fonction
+            await Task.Run(async () =>
+            {
+                await GameConnection.SendAsync("GiveAnswer", Game, answer);
 
-                if (Game.QuestionPool.Count == 0)
-                {
-                    EndGame();
-                }
-                else
-                {
-                    AskQuestion();
-                }
+                Thread.Sleep(3000);
+            });
+
+            if (Game.QuestionPool.Count == 0)
+            {
+                EndGame();
+            }
+            else
+            {
+                AskQuestion();
             }
         }
 
@@ -130,7 +169,7 @@ namespace QuizzNoGood.Controllers
         {
             await Task.Run(async () =>
             {
-                await GameConnection.SendAsync("EndGame", Game);
+                await GameConnection.SendAsync("EndGame", Game, Game.ComputeScore(), Game.GetWinner());
 
                 Thread.Sleep(5000);
 

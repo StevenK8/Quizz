@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace QuizzNoGood.Business
 {
@@ -13,14 +16,16 @@ namespace QuizzNoGood.Business
         public HashSet<Question> QuestionPool { get; set; }
         public Question CurrentQuestion { get; set; }
         public List<int> Difficulty { get; set; }
+        public bool IsTimed { get; set; }
 
-        public Game(string id)
+        public Game(string id, bool isTimed)
         {
             Id = id;
             Users = new HashSet<GameUserInfos>();
             QuestionAsked = new HashSet<Question>();
             QuestionPool = new HashSet<Question>();
             Difficulty = new List<int>(){1,2,3};
+            IsTimed = isTimed;
         }
 
         public void RegisterUser(User user)
@@ -72,13 +77,22 @@ namespace QuizzNoGood.Business
             }
         }
 
-        public void AddPointToUser(int userId)
+        public void AddPointToUser(int userId, TimeSpan? elapsed)
         {
             var user = Users.FirstOrDefault(u => u.User.Id == userId);
 
             if (user != null)
             {
-                user.Score += 1;
+                if (IsTimed)
+                {
+                    double percentage = 1-elapsed.Value.Milliseconds / 3000.00;
+                    int value = (int) (percentage * 100);
+                    user.Score += value;
+                }
+                else
+                {
+                    user.Score += 100;
+                }
                 user.IsGoodAnswer = true;
             }
         }
@@ -92,12 +106,17 @@ namespace QuizzNoGood.Business
         {
             List<string> result = new List<string>();
 
-            foreach (var user in Users)
+            foreach (var user in Users.OrderByDescending(u => u.Score))
             {
                 result.Add($"{user.User.Username} : {user.Score}");
             }
 
             return result.ToArray();
+        }
+
+        public string GetWinner()
+        {
+            return Users.OrderByDescending(u => u.Score).First().User.Username;
         }
     }
 }

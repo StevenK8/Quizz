@@ -7,6 +7,7 @@ namespace QuizzNoGood.Models
 {
     public class IndexViewModel
     {
+        public string GameId;
         public bool IsConnected { get; set; } = false;
 
     }

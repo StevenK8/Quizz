@@ -41,7 +41,7 @@ namespace QuizzNoGood.Controllers
         {
             foreach (var gameUser in game.Users)
             {
-                await Clients.Client(gameUser.ConnectionId).SendAsync("AskQuestion", question, choices.ToArray());
+                await Clients.Client(gameUser.ConnectionId).SendAsync("AskQuestion", question, choices.ToArray(), game.IsTimed);
             }
         }
 
@@ -54,11 +54,11 @@ namespace QuizzNoGood.Controllers
             }
         }
         
-        public async Task EndGame(Game game, List<string> scores)
+        public async Task EndGame(Game game, List<string> scores, string winner)
         {
             foreach (var gameUser in game.Users)
             {
-                await Clients.Client(gameUser.ConnectionId).SendAsync("EndGame", scores.ToArray());
+                await Clients.Client(gameUser.ConnectionId).SendAsync("EndGame", scores.ToArray(), winner);
             }
         }
 

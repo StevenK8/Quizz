@@ -3,6 +3,7 @@
 var urlParams = new URLSearchParams(window.location.search);
 var gameId = urlParams.get('gameId');
 var userId = parseInt(urlParams.get('userId'), 10);
+var isTimed = false;
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/GameHub").build();
 
@@ -16,10 +17,10 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 
-connection.on("AskQuestion", function (question, choices) {
+connection.on("AskQuestion", function (question, choices, timed) {
     var questions = document.getElementById("questions");
     var answers = document.getElementById("answers");
-
+    isTimed = timed;
     questions.innerHTML = '';
     answers.innerHTML = '';
 
@@ -49,9 +50,15 @@ connection.on("AskQuestion", function (question, choices) {
 
     answers.appendChild(divanswers);
     answers.appendChild(divbtn);
+    if (isTimed) {
+        SetTimer();
+    }
 });
 
 function GiveAnswer(choice) {
+    if (isTimed) {
+        HideTimer();
+    }
     connection.invoke("AnswerQuestion", userId, gameId, choice).catch(function (err) {
         return console.error(err.toString());
     });
@@ -60,6 +67,7 @@ function GiveAnswer(choice) {
 connection.on("ReceiveAnswer", function (answer, score, isGoodAnswer) {
     var answers = document.getElementById("answers");
     answers.innerHTML = '';
+    HideTimer();
 
     var tag = document.createElement("p");
 
@@ -124,7 +132,40 @@ function computeScore(score) {
     //table.appendChild(tbody);
 }
 
-connection.on("EndGame", function (scores) {
-   
+var timerId;
+function SetTimer() {
+    var timeLeft = 29;
+    var elem = document.getElementById('timer');
+    timerId = setInterval(countdown, 1000);
+
+    function countdown() {
+        if (timeLeft == 0) {
+            elem.innerHTML = 'fin du temps';
+        } else {
+            elem.innerHTML = timeLeft + ' secondes...';
+            timeLeft--;
+        }
+    }
+}
+
+function HideTimer() {
+    clearInterval(timerId);
+    var elem = document.getElementById('timer');
+    elem.innerHTML = '';
+}
+
+
+connection.on("EndGame", function (scores, winner) {
+
+    var questions = document.getElementById("questions");
+    var answers = document.getElementById("answers");
+    questions.innerHTML = '';
+    answers.innerHTML = '';
+
+    var tag = document.createElement("p");
+    var text = document.createTextNode("Fin de la partie, le gagnant est : " + winner + ". Félicitation !");
+    tag.appendChild(text);
+    questions.appendChild(tag);
+    computeScore(scores);
 });
 
