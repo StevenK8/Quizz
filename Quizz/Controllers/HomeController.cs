@@ -37,7 +37,7 @@ namespace QuizzNoGood.Controllers
         
         public IActionResult Inscription()
         {
-            return View();
+            return View(new InscriptionViewModel());
         }
 
         public IActionResult Privacy()
@@ -71,7 +71,7 @@ namespace QuizzNoGood.Controllers
             }
         }
 
-        public IActionResult Inscription(InscriptionViewModel inscription)
+        public IActionResult UserInscription(InscriptionViewModel inscription)
         {
             inscription.CreateUserFormInscription();
             return View();
