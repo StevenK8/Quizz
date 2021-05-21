@@ -32,20 +32,23 @@ connection.on("AskQuestion", function (question, choices, timed) {
     var i = 1;
     var divanswers = document.createElement("div");
     var divbtn = document.createElement("div");
-
     choices.forEach(choice => {
-        tag = document.createElement("p");
-        text = document.createTextNode(i +" : " + choice);
-        tag.appendChild(text);
-        divanswers.appendChild(tag);
+        if (choice != "vide") {
+            let btn = document.createElement("button");
+            btn.setAttribute("class", "btn btn-primary d-grid gap-2 col-4 mx-auto");
+            btn.innerHTML = choice;
+            btn.onclick = function () {
+                GiveAnswer(choice);
+            };
+            i = i + 1;
 
-        let btn = document.createElement("button");
-        btn.innerHTML = i;
-        btn.onclick = function () {
-            GiveAnswer(choice);
-        };
-        i = i + 1;
-        divbtn.appendChild(btn);
+            var newLine = document.createElement('br');
+            var newLine2 = document.createElement('br');
+
+            divbtn.appendChild(btn);
+            divbtn.appendChild(newLine);
+            divbtn.appendChild(newLine2);
+        }
     })
 
     answers.appendChild(divanswers);
