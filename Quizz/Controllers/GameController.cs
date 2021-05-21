@@ -141,7 +141,7 @@ namespace QuizzNoGood.Controllers
                 }
             }
 
-            if (Game.IsTimed)
+            if (Game.IsTimed && Game.AllUsersAnswered())
             {
                 Timer.Enabled = false;
                 Timer.Stop();
