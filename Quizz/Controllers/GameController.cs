@@ -60,11 +60,11 @@ namespace QuizzNoGood.Controllers
             Random randomizer = new Random();
             DBConnection DB = new DBConnection();
             var themes = DB.SelectThemes();
-
             var questions = DB.SelectQuestions(themes.Select(t => t.Id).ToList(), Game.Difficulty);
-            var result = questions.ToArray()[randomizer.Next(questions.Count)];
-            Game.QuestionPool = questions.Take(10).ToHashSet();
-            }
+
+            var selectedQuestions = questions.OrderBy(x => randomizer.Next()).ToHashSet();
+            Game.QuestionPool = selectedQuestions.Take(10).ToHashSet();
+        }
 
         public void AskQuestion()
         {
