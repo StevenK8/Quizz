@@ -54,7 +54,7 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     /* background-color: #A92B30; */
     text-align:center;
-    color:white;
+    /* color:white; */
 } /* TODO Ne prend pas le header/prend le footer*/
 
 
