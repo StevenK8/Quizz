@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
+using QuizzNoGood.Business;
 using QuizzNoGood.Controllers;
 
 namespace QuizzNoGood.Models
 {
     public class WaitingHubViewModel
     {
-        public WaitingHubViewModel(string id)
+        public WaitingHubViewModel(string gameId, int userId)
         {
-            Id = id;
+            GameId = gameId;
+            UserId = UserId;
         }
 
-        public string Id { get; }
+        public string GameId { get; }
+        public int UserId { get; }
+
     }
 }

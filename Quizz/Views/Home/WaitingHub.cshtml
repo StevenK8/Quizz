@@ -33,9 +33,9 @@
 <h1>Identifiant de la partie : </h1>
 
 <!-- PAS VIRER en dessous-->
-<h1 id="idgame">@Model.Id</h1>
+<h1 id="idgame">@Model.GameId</h1>
 
-<a asp-controller="Home" class="btn btn-primary" asp-action="GoToGameView" asp-route-gameId="@Model.Id" method="post">Lancer la partie</a>
+<a asp-controller="Home" class="btn btn-primary" asp-action="GoToGameView" asp-route-gameId="@Model.GameId" asp-route-userId="@Model.UserId" method="post">Lancer la partie</a>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="/js/waitinghub.js"></script>
