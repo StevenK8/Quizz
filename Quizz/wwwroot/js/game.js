@@ -35,7 +35,7 @@ connection.on("AskQuestion", function (question, choices, timed) {
 
     choices.forEach(choice => {
         tag = document.createElement("p");
-        text = document.createTextNode(choice);
+        text = document.createTextNode(i +" : " + choice);
         tag.appendChild(text);
         divanswers.appendChild(tag);
 

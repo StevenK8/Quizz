@@ -18,19 +18,21 @@ namespace QuizzNoGood.Business
         /// Possibly null
         /// </summary>
         public string False3 { get; private set; }
+        public string Difficulty { get; private set; }
 
         public bool VerifyAnswer(string answer)
         {
             throw new NotImplementedException();
         }
 
-        public Question(string sentence, string answer, string false1, string false2, string false3)
+        public Question(string sentence, string answer, string false1, string false2, string false3, string difficulty)
         {
             Sentence = sentence;
             Answer = answer;
             False1 = false1;
             False2 = false2;
             False3 = false3;
+            Difficulty = difficulty;
         }
     }
 }
