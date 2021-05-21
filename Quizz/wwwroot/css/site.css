@@ -34,6 +34,7 @@ for details on configuring this project to bundle and minify static web assets. 
     flex-direction: row;
     width:50%;
     padding-bottom: 60px;
+    padding-top: 5px;
     /* border: dashed; */
     /* border-color: aquamarine; */
 }
@@ -72,6 +73,7 @@ body {
 } /* TODO Ne prend pas le header/prend le footer*/
 
 
+
 .Button_submit {
     background: transparent;
     border: none;
@@ -86,7 +88,12 @@ body {
     display: inline-block;
 }
 
-
+.ball {
+  position: absolute;
+  border-radius: 100%;
+  opacity: 0.7;
+  z-index: -1;
+}
 
 img.Logo {
     align-self:center;
