@@ -178,7 +178,7 @@ connection.on("EndGame", function (scores, winner) {
     
 
     var tag = document.createElement("p");
-    var text = document.createTextNode("Fin de la partie, le gagnant est : " + winner + ". Félicitation !");
+    var text = document.createTextNode("Fin de la partie, le gagnant est : " + winner + ". Félicitations !");
     tag.appendChild(text);
     questions.appendChild(tag);
     computeScore(scores);
