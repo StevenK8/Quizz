@@ -76,10 +76,10 @@ namespace QuizzNoGood.Controllers
             return View(new IndexViewModel() { IsConnected = user is not null});
         }
         
-        public IActionResult Profil()
-        {
-            return View();
-        }
+        //public IActionResult Profil()
+        //{
+        //    return View();
+        //}
         
         public IActionResult Connection(int errorCode)
         {
