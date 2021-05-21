@@ -33,6 +33,7 @@ for details on configuring this project to bundle and minify static web assets. 
     display: flex;
     flex-direction: row;
     width:50%;
+    padding-bottom: 60px;
     /* border: dashed; */
     /* border-color: aquamarine; */
 }
