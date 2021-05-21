@@ -99,7 +99,7 @@ namespace QuizzNoGood.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult GoToWaitingHub(IndexViewModel index, int isJoin, int isTimed)
+        public IActionResult GoToWaitingHub(IndexViewModel index, int isJoin, int isTimed, int isDeathMatch)
         {
             bool isJoinb = isJoin == 1;
 
@@ -111,7 +111,8 @@ namespace QuizzNoGood.Controllers
                 {
                     if (isJoinb)
                     {
-                        var id = Request.Form["idGame"].First();
+                        //var id = Request.Form["idGame"].First();
+                        var id = index.GameId;
 
                         WebContext.GetInstance().GameManager.RegisterUser(id, u);
                         return RedirectToAction("WaitingHub", new
@@ -122,8 +123,8 @@ namespace QuizzNoGood.Controllers
 
                     }
                     else
-                    {   //partie timée
-                        var id = WebContext.GetInstance().GameManager.CreateGame(isTimed == 1);
+                    {   
+                        var id = WebContext.GetInstance().GameManager.CreateGame(isTimed == 1, isDeathMatch == 1);
                         WebContext.GetInstance().GameManager.RegisterUser(id, u);
 
                         return RedirectToAction("WaitingHub", new

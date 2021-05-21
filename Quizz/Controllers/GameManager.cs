@@ -14,10 +14,10 @@ namespace QuizzNoGood.Controllers
             Games = new HashSet<GameController>();
         }
 
-        public string CreateGame(bool isTimed)
+        public string CreateGame(bool isTimed, bool isDeathMatch)
         {
             string id = GenerateUnregisteredRandomId();
-            Game game = new Game(id, isTimed);
+            Game game = new Game(id, isTimed, isDeathMatch);
             GameController gc = new GameController(game);
             Games.Add(gc);
             return id;

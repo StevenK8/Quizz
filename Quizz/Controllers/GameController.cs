@@ -100,6 +100,10 @@ namespace QuizzNoGood.Controllers
                     Stopwatch.Start();
                 }
             }
+            else if (Game.IsDeathMatch)
+            {
+
+            }
         }
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
@@ -110,7 +114,12 @@ namespace QuizzNoGood.Controllers
         private async void GiveAnswer()
         {
             var question = Game.CurrentQuestion;
-            await GameConnection.SendAsync("GiveAnswer", Game, Game.CurrentQuestion.Answer);
+            string msg = null;
+            if (Game.IsDeathMatch)
+            {
+                msg = $"{Game.GetWinner()} as won";
+            }
+            await GameConnection.SendAsync("GiveAnswer", Game, Game.CurrentQuestion.Answer, msg );
             Game.CurrentQuestion = null;
             Game.ResetUsersHasAnswered();
             AskQuestionOrEndGame(question.Answer);
@@ -125,16 +134,24 @@ namespace QuizzNoGood.Controllers
             }
                 
             Game.SetUserHasAnswered(userId);
+            bool deathMatchEnd = false;
             if (Equals(Game.CurrentQuestion.Answer, answer))
             {
                 Game.AddPointToUser(userId, elapsed);
+                if (Game.IsDeathMatch)
+                {
+                    deathMatchEnd = true;
+                }
             }
 
-            if (Game.AllUsersAnswered())
+            if (Game.IsTimed)
             {
                 Timer.Enabled = false;
                 Timer.Stop();
                 Timer.Close();
+            }
+            if (deathMatchEnd || Game.AllUsersAnswered())
+            {
                 AskQuestionOrEndGame(Game.CurrentQuestion.Answer);
             }
         }

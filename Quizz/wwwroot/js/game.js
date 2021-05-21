@@ -64,7 +64,7 @@ function GiveAnswer(choice) {
     });
 }
 
-connection.on("ReceiveAnswer", function (answer, score, isGoodAnswer) {
+connection.on("ReceiveAnswer", function (answer, score, isGoodAnswer, msg) {
     var answers = document.getElementById("answers");
     answers.innerHTML = '';
     HideTimer();
@@ -75,6 +75,8 @@ connection.on("ReceiveAnswer", function (answer, score, isGoodAnswer) {
     if (isGoodAnswer)
     {
         text = document.createTextNode("Bonne réponse !");
+        if (msg != null)
+            text.innerHTML += msg;
     }
     else
     {

@@ -46,11 +46,11 @@ namespace QuizzNoGood.Controllers
         }
 
         //Pour chaque user envoyer si la réponse est bonne et le score de toute le monde
-        public async Task GiveAnswer(Game game, string answer)
+        public async Task GiveAnswer(Game game, string answer, string msg)
         {
             foreach (var gameUser in game.Users)
             {
-                await Clients.Client(gameUser.ConnectionId).SendAsync("ReceiveAnswer", answer, game.ComputeScore(), gameUser.IsGoodAnswer);
+                await Clients.Client(gameUser.ConnectionId).SendAsync("ReceiveAnswer", answer, game.ComputeScore(), gameUser.IsGoodAnswer, msg);
             }
         }
         
@@ -62,7 +62,7 @@ namespace QuizzNoGood.Controllers
             }
         }
 
-        public async Task AnswerQuestion(int userId, string gameId, string answer)
+        public void AnswerQuestion(int userId, string gameId, string answer)
         {
             var game = WebContext.GetInstance().GameManager.GetGameById(gameId);
             game.AnswerQuestion(userId, answer);

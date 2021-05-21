@@ -17,8 +17,9 @@ namespace QuizzNoGood.Business
         public Question CurrentQuestion { get; set; }
         public List<int> Difficulty { get; set; }
         public bool IsTimed { get; set; }
+        public bool IsDeathMatch { get; set; }
 
-        public Game(string id, bool isTimed)
+        public Game(string id, bool isTimed, bool isDeathMatch)
         {
             Id = id;
             Users = new HashSet<GameUserInfos>();
@@ -26,6 +27,7 @@ namespace QuizzNoGood.Business
             QuestionPool = new HashSet<Question>();
             Difficulty = new List<int>(){1,2,3};
             IsTimed = isTimed;
+            IsDeathMatch = isDeathMatch;
         }
 
         public void RegisterUser(User user)
