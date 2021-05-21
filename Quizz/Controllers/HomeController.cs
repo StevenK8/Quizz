@@ -122,7 +122,7 @@ namespace QuizzNoGood.Controllers
 
                     }
                     else
-                    {
+                    {   //partie timée
                         var id = WebContext.GetInstance().GameManager.CreateGame(isTimed == 1);
                         WebContext.GetInstance().GameManager.RegisterUser(id, u);
 
