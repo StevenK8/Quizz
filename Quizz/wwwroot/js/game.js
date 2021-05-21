@@ -33,13 +33,9 @@ connection.on("AskQuestion", function (question, choices, timed) {
     var divanswers = document.createElement("div");
     var divbtn = document.createElement("div");
     choices.forEach(choice => {
-        /*tag = document.createElement("p");
-        text = document.createTextNode(i +" : " + choice);
-        tag.appendChild(text);
-        divanswers.appendChild(tag);*/
         if (choice != "vide") {
             let btn = document.createElement("button");
-            btn.setAttribute("class", "btn btn-primary Form col-lg-10");
+            btn.setAttribute("class", "btn btn-primary d-grid gap-2 col-4 mx-auto");
             btn.innerHTML = choice;
             btn.onclick = function () {
                 GiveAnswer(choice);
