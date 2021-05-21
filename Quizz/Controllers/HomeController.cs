@@ -69,7 +69,10 @@ namespace QuizzNoGood.Controllers
                 {
                     //renvoyer une erreur
                 }
+
+                HttpContext.Session.SetString(USER, stringUser);
             }
+
             return View(new IndexViewModel() { IsConnected = user is not null});
         }
         
@@ -115,6 +118,8 @@ namespace QuizzNoGood.Controllers
                         var id = index.GameId;
 
                         WebContext.GetInstance().GameManager.RegisterUser(id, u);
+
+                        HttpContext.Session.SetString(USER, s);
                         return RedirectToAction("WaitingHub", new
                         {
                             gameId = id,
@@ -127,6 +132,7 @@ namespace QuizzNoGood.Controllers
                         var id = WebContext.GetInstance().GameManager.CreateGame(isTimed == 1, isDeathMatch == 1);
                         WebContext.GetInstance().GameManager.RegisterUser(id, u);
 
+                        HttpContext.Session.SetString(USER, s);
                         return RedirectToAction("WaitingHub", new
                         {
                             gameId = id,
@@ -141,28 +147,20 @@ namespace QuizzNoGood.Controllers
 
         public IActionResult WaitingHub(string gameId, int userId)
         {
-            return View(new WaitingHubViewModel(gameId));
+            return View(new WaitingHubViewModel(gameId, userId));
         }
 
 
-        public IActionResult GoToGameView(string gameId)
+        public IActionResult GoToGameView(string gameId, int userId)
         {
-            string s = HttpContext.Session.GetString(USER);
-            if (s != null)
-            {
-                User u = JsonConvert.DeserializeObject<User>(s);
-                if (u != null)
-                {
-                    WebContext.GetInstance().GameManager.StartGame(gameId);
-                    return RedirectToAction("GameView", new
-                    {
-                        gameId = gameId,
-                        userId = u.Id
-                    });
-                }
-            }
 
-            return RedirectToAction("Connection", new { errorCode = 5 });
+            WebContext.GetInstance().GameManager.StartGame(gameId);
+
+            return RedirectToAction("GameView", new
+            {
+                gameId = gameId,
+                userId = userId
+            });
         }
 
         public IActionResult GameView()
