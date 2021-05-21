@@ -74,6 +74,7 @@ namespace QuizzNoGood.Business
             foreach (var user in Users)
             {
                 user.HasAnswered = false;
+                user.IsGoodAnswer = false;
             }
         }
 

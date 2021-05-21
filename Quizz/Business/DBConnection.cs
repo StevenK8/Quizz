@@ -153,7 +153,7 @@ namespace QuizzNoGood.Business
                             string false2 = reader.GetString(4);
                             string false3 = reader.GetString(5);
                             string diff = reader.GetString(6);
-                            questionList.Add(new Question(question,answer,false1,false2,diff));
+                            questionList.Add(new Question(question,answer,false1,false2, false3, diff));
                         }
                     }else{
                         return null;
