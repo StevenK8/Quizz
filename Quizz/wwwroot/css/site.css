@@ -5,6 +5,9 @@ for details on configuring this project to bundle and minify static web assets. 
     border-color:aquamarine;
 }
 
+.btn-primary{
+  background-color: #1c1f88 !important; 
+}
 
 .Button {
     background: transparent;
