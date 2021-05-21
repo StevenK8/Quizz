@@ -28,8 +28,8 @@ connection.on("UserConnected", function (players) {
     });
 });
 
-connection.on("GameStarted", function () {
-    var search = window.location.search;
-    var location = window.location.origin + "/Home/GameView" + search;
-    window.location.replace = location;
-});
+//connection.on("GameStarted", function () {
+//    var search = window.location.search;
+//    var location = window.location.origin + "/Home/GameView" + search;
+//    window.location.replace = location;
+//});

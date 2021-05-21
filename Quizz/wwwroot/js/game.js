@@ -172,13 +172,28 @@ connection.on("EndGame", function (scores, winner) {
 
     var questions = document.getElementById("questions");
     var answers = document.getElementById("answers");
-    questions.innerHTML = '';
-    answers.innerHTML = '';
+    questions.innerHTML = "";
+    answers.innerHTML = "";
+
+    
 
     var tag = document.createElement("p");
     var text = document.createTextNode("Fin de la partie, le gagnant est : " + winner + ". Félicitation !");
     tag.appendChild(text);
     questions.appendChild(tag);
     computeScore(scores);
+
+    let btn = document.createElement("button");
+    btn.setAttribute("class", "btn btn-primary d-grid gap-2 col-4 mx-auto");
+    btn.innerHTML = "Retour au menu";
+    btn.onclick = function () {
+        RedirectToIndex();
+    };
+    answers.appendChild(btn);
 });
+
+function RedirectToIndex() {
+    var location = window.location.origin;
+    window.location.href = location;
+}
 

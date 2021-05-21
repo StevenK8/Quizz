@@ -30,6 +30,7 @@ namespace QuizzNoGood.Controllers
         public void StartGame()
         {
             LoadQuestions();
+            Game.IsRunning = true;
             GameConnection.SendAsync("StartGame", Game);
         }
 
@@ -182,6 +183,8 @@ namespace QuizzNoGood.Controllers
 
                 await GameConnection.SendAsync("DisplayScores", Game);
             });
+
+            WebContext.GetInstance().GameManager.Games.RemoveWhere(g => Equals(g.Game.Id, Game.Id));
         }
 
         public void ConnectUser(int idUser, string connectionId)

@@ -18,6 +18,7 @@ namespace QuizzNoGood.Business
         public List<int> Difficulty { get; set; }
         public bool IsTimed { get; set; }
         public bool IsDeathMatch { get; set; }
+        public bool IsRunning { get; set; }
 
         public Game(string id, bool isTimed, bool isDeathMatch)
         {
@@ -28,6 +29,7 @@ namespace QuizzNoGood.Business
             Difficulty = new List<int>(){1,2,3};
             IsTimed = isTimed;
             IsDeathMatch = isDeathMatch;
+            IsRunning = false;
         }
 
         public void RegisterUser(User user)

@@ -114,8 +114,13 @@ namespace QuizzNoGood.Controllers
                 {
                     if (isJoinb)
                     {
-                        //var id = Request.Form["idGame"].First();
                         var id = index.GameId;
+                        var game = WebContext.GetInstance().GameManager.GetGameById(id);
+
+                        if (game == null || game.Game.IsRunning)
+                        {
+                            return RedirectToAction("Index");
+                        }
 
                         WebContext.GetInstance().GameManager.RegisterUser(id, u);
 
