@@ -75,11 +75,12 @@ connection.on("ReceiveAnswer", function (answer, score, isGoodAnswer, msg) {
     var tag = document.createElement("p");
 
     var text;
-    if (isGoodAnswer)
-    {
-        text = document.createTextNode("Bonne réponse !");
-        if (msg != null)
-            text.innerHTML += msg;
+    if (isGoodAnswer) {
+        if (msg == null) {
+            msg = "";
+        }
+        text = document.createTextNode("Bonne réponse ! " + msg);
+        
     }
     else
     {

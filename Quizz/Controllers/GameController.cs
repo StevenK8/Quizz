@@ -100,10 +100,6 @@ namespace QuizzNoGood.Controllers
                     Stopwatch.Start();
                 }
             }
-            else if (Game.IsDeathMatch)
-            {
-
-            }
         }
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
@@ -161,7 +157,7 @@ namespace QuizzNoGood.Controllers
             //En faire une fonction
             await Task.Run(async () =>
             {
-                await GameConnection.SendAsync("GiveAnswer", Game, answer);
+                await GameConnection.SendAsync("GiveAnswer", Game, answer, "");
 
                 Thread.Sleep(3000);
             });
