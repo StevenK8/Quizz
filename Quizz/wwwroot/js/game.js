@@ -16,7 +16,7 @@ connection.start().then(function () {
 }).catch(function (err) {
     return console.error(err.toString());
 });
-
+var divbtn;
 connection.on("AskQuestion", function (question, choices, timed) {
     var questions = document.getElementById("questions");
     var answers = document.getElementById("answers");
@@ -31,9 +31,9 @@ connection.on("AskQuestion", function (question, choices, timed) {
 
     var i = 1;
     var divanswers = document.createElement("div");
-    var divbtn = document.createElement("div");
+    divbtn = document.createElement("div");
     choices.forEach(choice => {
-        if (choice != "vide") {
+        if (choice !== "vide") {
             let btn = document.createElement("button");
             btn.setAttribute("class", "btn btn-primary d-grid gap-2 col-4 mx-auto");
             btn.innerHTML = choice;
@@ -42,8 +42,8 @@ connection.on("AskQuestion", function (question, choices, timed) {
             };
             i = i + 1;
 
-            var newLine = document.createElement('br');
-            var newLine2 = document.createElement('br');
+            var newLine = document.createElement("br");
+            var newLine2 = document.createElement("br");
 
             divbtn.appendChild(btn);
             divbtn.appendChild(newLine);
@@ -62,6 +62,13 @@ function GiveAnswer(choice) {
     if (isTimed) {
         HideTimer();
     }
+    var answers = document.getElementById("answers");
+    answers.removeChild(divbtn);
+    var tag = document.createElement("p");
+    var text = document.createTextNode("En attente de la réponse de l'adversaire...");
+    tag.appendChild(text);
+    answers.appendChild(tag);
+
     connection.invoke("AnswerQuestion", userId, gameId, choice).catch(function (err) {
         return console.error(err.toString());
     });
@@ -141,14 +148,14 @@ function computeScore(score) {
 var timerId;
 function SetTimer() {
     var timeLeft = 29;
-    var elem = document.getElementById('timer');
+    var elem = document.getElementById("timer");
     timerId = setInterval(countdown, 1000);
 
     function countdown() {
         if (timeLeft == 0) {
-            elem.innerHTML = 'fin du temps';
+            elem.innerHTML = "Fin du temps";
         } else {
-            elem.innerHTML = timeLeft + ' secondes...';
+            elem.innerHTML = timeLeft + " secondes...";
             timeLeft--;
         }
     }
@@ -157,7 +164,7 @@ function SetTimer() {
 function HideTimer() {
     clearInterval(timerId);
     var elem = document.getElementById('timer');
-    elem.innerHTML = '';
+    elem.innerHTML = "";
 }
 
 
