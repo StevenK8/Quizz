@@ -41,8 +41,8 @@ ViewData["Title"] = "Home Page";
             <div class="row">
             <form asp-controller="Home" asp-action="GoToWaitingHub" asp-route-isJoin="true" method="post">
                 <!-- @Html.TextBox("idGame") -->
-                <div class="input-group mb-3 col-lg-5">
-                    <input type="text" class="form-control" placeholder="Numéro de partie"
+                <div class="input-group mb-3 d-flex justify-content-center">
+                    <input type="text" class="form-control col-lg-4" placeholder="Numéro de partie"
                         aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <button type="submit" class="input-group-text btn btn-primary" id="basic-addon2">Rejoindre un Quiz</span>
                 </div>
@@ -65,10 +65,10 @@ ViewData["Title"] = "Home Page";
                 <br />
             </div>
 
-            <div id="Menu" class="container ">
-                <div Class="Button d-grid gap-2">
-                    <a asp-area="" asp-controller="Home" class="btn btn-primary btn-lg" asp-action="GoToWaitingHub" asp-route-isJoin="0" asp-route-isTimed="1">Créer un Quiz Timé</a>
-                    <a asp-area="" asp-controller="Home" class="btn btn-primary btn-lg" asp-action="GoToWaitingHub" asp-route-isJoin="0" asp-route-isTimed="0">Créer un Quiz Classique</a>
+            <div id="Menu" class="container d-flex justify-content-center flex-wrap">
+                <div Class="row gap-3">
+                    <a asp-area="" asp-controller="Home" class="btn btn-primary btn-lg col" asp-action="GoToWaitingHub" asp-route-isJoin="0" asp-route-isTimed="1">Créer un Quiz Timé</a>
+                    <a asp-area="" asp-controller="Home" class="btn btn-primary btn-lg col" asp-action="GoToWaitingHub" asp-route-isJoin="0" asp-route-isTimed="0">Créer un Quiz Classique</a>
                 </div>
             </div>
 
