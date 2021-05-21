@@ -10,10 +10,10 @@
 
         <!--génère un lien pour rejoindre une partie-->
         <!--Si personne regoignant -> bouton grisé -->
-        <button class="btn btn-secondary">Partager</button>
+        <!--<button class="btn btn-secondary">Partager</button>-->
 
         <!--Lance la Partie-->
-        <button class="btn btn-secondary">Commencer la partie </button>
+        <!--<button class="btn btn-secondary">Commencer la partie </button>-->
     </div>
     
     <div class="container d-flex justify-content-center">
@@ -37,7 +37,7 @@
 <!-- PAS VIRER en dessous-->
 <h1 id="idgame">@Model.GameId</h1>
 
-<a asp-controller="Home" class="btn btn-primary" asp-action="GoToGameView" asp-route-gameId="@Model.GameId" asp-route-userId="@Model.UserId" method="post">Lancer la partie</a>
+<a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="GoToGameView" asp-route-gameId="@Model.GameId" asp-route-userId="@Model.UserId">Lancer la partie</a>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="/js/waitinghub.js"></script>

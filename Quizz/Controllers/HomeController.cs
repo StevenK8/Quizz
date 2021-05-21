@@ -163,7 +163,7 @@ namespace QuizzNoGood.Controllers
             });
         }
 
-        public IActionResult GameView()
+        public IActionResult GameView(string gameId, int userId)
         {
             return View();
         }

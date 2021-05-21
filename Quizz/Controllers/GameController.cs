@@ -42,7 +42,7 @@ namespace QuizzNoGood.Controllers
 #if DEBUG
                 address = "http://localhost:53701/GameHub";
 #else
-                address = ""; // todo mettre l'adresse 
+                address = "http://server-fraaktal.ddns.net:4343/GameHub";
 #endif
 
                 GameConnection = new HubConnectionBuilder().WithUrl(address).Build();
