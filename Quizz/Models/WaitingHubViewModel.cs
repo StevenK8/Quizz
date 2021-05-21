@@ -13,11 +13,11 @@ namespace QuizzNoGood.Models
         public WaitingHubViewModel(string gameId, int userId)
         {
             GameId = gameId;
-            UserId = UserId;
+            UserId = userId;
         }
 
-        public string GameId { get; }
-        public int UserId { get; }
+        public string GameId { get; set; }
+        public int UserId { get; set; }
 
     }
 }
